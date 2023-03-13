@@ -7,24 +7,84 @@
     tools:context=".LoginFragment">
 
     <TextView
-        android:id="@+id/textView5"
-        android:layout_width="0dp"
+        android:id="@+id/login_username_tv"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/textView7"
+        android:layout_marginTop="250dp"
+        android:text="UserName"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toStartOf="@+id/login_username_pt"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="0dp"
+    <EditText
+        android:id="@+id/login_username_pt"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
-        android:text="TextView"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/login_username_tv"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/login_password_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Password"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toStartOf="@+id/login_password_pt"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_username_tv" />
+
+    <EditText
+        android:id="@+id/login_password_pt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/login_password_tv"
+        app:layout_constraintTop_toBottomOf="@+id/login_username_pt" />
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="408dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#DDD1BF"
+        android:text="LOGIN"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_password_pt" />
+
+    <Button
+        android:id="@+id/login_donthaveaaccount_btn"
+        android:layout_width="275dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="150dp"
+        android:backgroundTint="@android:color/transparent"
+        android:text="Don't Have An Account ?"
+        android:textColor="#100F0F"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.894"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_btn"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
