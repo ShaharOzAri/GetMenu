@@ -41,9 +41,11 @@ public class HomeFragment extends Fragment {
         list.setLayoutManager(new LinearLayoutManager(view.getContext()));
         PostRecyclerAdapter adapter = new PostRecyclerAdapter();
         data = Model.instance().getAllPosts();
+
         plusFab.setOnClickListener(view1 -> {
-            Navigation.findNavController(view).navigate(R.id.action_nav_home_to_addPostFragment);
+            Navigation.findNavController(view1).navigate(R.id.action_nav_home_to_addPostFragment);
         });
+
 
         list.setAdapter(adapter);
 
@@ -51,8 +53,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClick(int pos) {
                 Post ps = data.get(pos);
-                HomeFragmentDirections.actionNavHomeToAddPostFragment();
-                Navigation.findNavController(view).navigate(R.id.action_nav_home_to_showPostFragment);
+                HomeFragmentDirections.ActionNavHomeToShowPostFragment action = HomeFragmentDirections.actionNavHomeToShowPostFragment(ps.getId(),ps.getTitle(),ps.getUserName(),ps.getUserId(),ps.getPostImageUrl(),ps.getUserProfileUrl());
+                Navigation.findNavController(view).navigate(action);
             }
         });
 
@@ -70,6 +72,8 @@ public class HomeFragment extends Fragment {
             super(itemView);
             title = itemView.findViewById(R.id.postlistrow_title_tv);
             userName = itemView.findViewById(R.id.postlistrow_name_tv);
+            postImageUrl = itemView.findViewById(R.id.postlistrow_post_img);
+            userProfileUrl = itemView.findViewById(R.id.postlistrow_avatar_img);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -29,7 +29,6 @@ public class Post implements Serializable {
     String id = "";
     String title = "";
     String userId = "";
-    String content = "";
     String userName = "";
     String postImageUrl = "";
     String userProfileUrl = "";
@@ -46,6 +45,8 @@ public class Post implements Serializable {
         id = String.valueOf(i);
         title = "test";
         userName = "shahar";
+        postImageUrl = "https://cdn.onecklace.com/products/2653/product_2653_1_730.jpeg";
+        userProfileUrl = "https://cdn.onecklace.com/products/2653/product_2653_model_1_730.jpeg";
     }
 
     public Post(){}
@@ -58,7 +59,6 @@ public class Post implements Serializable {
         json.put("userProfileUrl", userProfileUrl);
         json.put("postImageUrl", postImageUrl);
         json.put("title", title);
-        json.put("content", content);
         json.put("isDeleted", isDeleted);
         json.put("imageVersion", imageVersion);
 //        json.put("updateDate", FieldValue.serverTimestamp());
@@ -96,10 +96,6 @@ public class Post implements Serializable {
             post.setPostImageUrl((String) json.get("postImageUrl"));
         }
 
-
-        if (json.containsKey("content")) {
-            post.setContent((String) json.get("content"));
-        }
 
         if (json.containsKey("userProfileUrl")) {
             post.setUserProfileUrl((String) json.get("userProfileUrl"));
@@ -156,10 +152,6 @@ public class Post implements Serializable {
         return title;
     }
 
-    public String getContent() {
-        return content;
-    }
-
     public Long getTimestamp() {
         return timestamp;
     }
@@ -196,10 +188,6 @@ public class Post implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public void setUserId(String userId) {

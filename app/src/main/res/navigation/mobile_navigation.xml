@@ -28,7 +28,14 @@
         android:id="@+id/nav_slideshow"
         android:name="com.example.getmenu.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_slideshow" >
+        <action
+            android:id="@+id/action_nav_slideshow_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_nav_slideshow_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addPostFragment"
         android:name="com.example.getmenu.AddPostFragment"
@@ -41,7 +48,59 @@
         tools:layout="@layout/fragment_show_post" >
         <argument
             android:name="PostId"
-            app:argType="integer"
-            android:defaultValue="0" />
+            app:argType="string" />
+        <argument
+            android:name="PostTitle"
+            app:argType="string" />
+        <argument android:name="PostUserName"
+            app:argType="string" />
+        <argument
+            android:name="PostUserId"
+            app:argType="string" />
+        <argument android:name="PostImageUrl"
+            app:argType="string" />
+        <argument
+            android:name="PostUserProfileUrl"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_showPostFragment_to_editPostFragment2"
+            app:destination="@id/editPostFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/editPostFragment"
+        android:name="com.example.getmenu.EditPostFragment"
+        android:label="fragment_edit_post"
+        tools:layout="@layout/fragment_edit_post" >
+        <argument
+            android:name="PostId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.getmenu.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.getmenu.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.getmenu.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.getmenu.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment><action android:id="@+id/action_global_signupFragment" app:destination="@id/signupFragment"/>
 </navigation>

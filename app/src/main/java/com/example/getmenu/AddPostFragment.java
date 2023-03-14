@@ -28,7 +28,6 @@ public class AddPostFragment extends Fragment {
 
         saveBtn.setOnClickListener(view1 -> {
             String name = nameEt.getText().toString();
-
         });
 
 //        cancelBtn.setOnClickListener(view1 -> finish());

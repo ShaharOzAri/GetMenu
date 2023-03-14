@@ -24,7 +24,7 @@
         android:id="@+id/ShowPost_author_avatar_img"
         android:layout_width="229dp"
         android:layout_height="106dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"

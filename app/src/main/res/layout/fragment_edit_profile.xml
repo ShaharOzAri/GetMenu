@@ -12,11 +12,11 @@
         android:layout_width="376dp"
         android:layout_height="65dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="5dp"
         android:backgroundTint="#DDD1BF"
         android:text="SAVE CHANGES"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,12 +24,13 @@
 
     <ImageView
         android:id="@+id/editprofile_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="153dp"
+        android:layout_height="140dp"
         android:layout_marginTop="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_menu_camera"
         tools:src="@tools:sample/avatars" />
 
     <EditText
