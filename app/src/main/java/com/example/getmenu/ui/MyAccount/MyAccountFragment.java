@@ -1,4 +1,4 @@
-package com.example.getmenu.ui.slideshow;
+package com.example.getmenu.ui.MyAccount;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.navigation.Navigation;
 import com.example.getmenu.R;
 
 
-public class SlideshowFragment extends Fragment {
+public class MyAccountFragment extends Fragment {
 
     SlideshowViewModel slideshowViewModel;
 
@@ -24,7 +24,7 @@ public class SlideshowFragment extends Fragment {
 
         Button editBtn = view.findViewById(R.id.profile_edit_btn);
         editBtn.setOnClickListener(view1 -> {
-            Navigation.findNavController(view1).navigate(R.id.action_nav_slideshow_to_editProfileFragment);
+            Navigation.findNavController(view1).navigate(R.id.action_myAccountFragment_to_profileFragment);
         });
 
         return view;

@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClick(int pos) {
                 Post ps = data.get(pos);
-                HomeFragmentDirections.ActionNavHomeToShowPostFragment action = HomeFragmentDirections.actionNavHomeToShowPostFragment(ps.getId());
+                HomeFragmentDirections.ActionNavHomeToShowPostFragment action = HomeFragmentDirections.actionNavHomeToShowPostFragment(ps.getId(),ps.getTitle(),ps.getUserName(),ps.getUserId(),ps.getPostImageUrl(),ps.getUserProfileUrl());
                 Navigation.findNavController(view).navigate(action);
             }
         });
