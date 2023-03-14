@@ -1,4 +1,4 @@
-package com.example.getmenu.ui.slideshow;
+package com.example.getmenu.ui.MyAccount;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,14 +12,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.getmenu.databinding.FragmentSlideshowBinding;
 
-public class SlideshowFragment extends Fragment {
+public class MyAccountFragment extends Fragment {
 
     private FragmentSlideshowBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
+        SlideshowViewModel slideshowViewModel = new ViewModelProvider(this).get(SlideshowViewModel.class);
 
         binding = FragmentSlideshowBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
