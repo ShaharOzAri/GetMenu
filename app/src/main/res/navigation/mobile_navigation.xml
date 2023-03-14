@@ -25,18 +25,6 @@
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.getmenu.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" >
-        <action
-            android:id="@+id/action_nav_slideshow_to_profileFragment"
-            app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/action_nav_slideshow_to_editProfileFragment"
-            app:destination="@id/editProfileFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/addPostFragment"
         android:name="com.example.getmenu.AddPostFragment"
         android:label="fragment_add_post"
@@ -103,4 +91,12 @@
             android:id="@+id/action_loginFragment_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment><action android:id="@+id/action_global_signupFragment" app:destination="@id/signupFragment"/>
+    <fragment
+        android:id="@+id/myAccountFragment"
+        android:name="com.example.getmenu.ui.MyAccount.MyAccountFragment"
+        android:label="MyAccountFragment" >
+        <action
+            android:id="@+id/action_myAccountFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>
