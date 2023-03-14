@@ -1,15 +1,20 @@
 package com.example.getmenu.ui.home;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.service.dreams.DreamService;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -23,43 +28,58 @@ import com.example.getmenu.R;
 import com.example.getmenu.databinding.FragmentHomeBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
+    FragmentHomeBinding binding;
+    List<Post> data = new LinkedList<>();
+    PostRecyclerAdapter adapter;
+    DrawerLayout drawerLayout;
 
-    HomeViewModel homeViewModel;
-    List<Post> data;
-
+    @SuppressLint("MissingInflatedId")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        FloatingActionButton plusFab = view.findViewById(R.id.main_add_post_btn);
-        RecyclerView list = view.findViewById(R.id.postrecycler_list);
-        list.setHasFixedSize(true);
+        binding = FragmentHomeBinding.inflate(inflater,container,false);
+        View view = binding.getRoot();
+        FloatingActionButton plusFab = binding.mainAddPostBtn;
 
-        list.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        PostRecyclerAdapter adapter = new PostRecyclerAdapter();
-        data = Model.instance().getAllPosts();
+        adapter = new PostRecyclerAdapter();
+        binding.postrecyclerList.setHasFixedSize(true);
+        binding.postrecyclerList.setAdapter(adapter);
+        binding.postrecyclerList.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         plusFab.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigate(R.id.action_nav_home_to_addPostFragment);
         });
-
-
-        list.setAdapter(adapter);
-
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
                 Post ps = data.get(pos);
-                HomeFragmentDirections.ActionNavHomeToShowPostFragment action = HomeFragmentDirections.actionNavHomeToShowPostFragment(ps.getId(),ps.getTitle(),ps.getUserName(),ps.getUserId(),ps.getPostImageUrl(),ps.getUserProfileUrl());
+                HomeFragmentDirections.ActionNavHomeToShowPostFragment action = HomeFragmentDirections.actionNavHomeToShowPostFragment(ps.getId());
                 Navigation.findNavController(view).navigate(action);
             }
         });
 
+        reloadData();
+
         return view;
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        reloadData();
+    }
+
+    void reloadData(){
+        binding.progressBar.setVisibility(View.VISIBLE);
+        Model.instance().getAllPosts((postList)->{
+            data = postList;
+            adapter.setData(data);
+            binding.progressBar.setVisibility(View.GONE);
+        });
     }
 
     class PostViewHolder extends RecyclerView.ViewHolder{
@@ -72,8 +92,6 @@ public class HomeFragment extends Fragment {
             super(itemView);
             title = itemView.findViewById(R.id.postlistrow_title_tv);
             userName = itemView.findViewById(R.id.postlistrow_name_tv);
-            postImageUrl = itemView.findViewById(R.id.postlistrow_post_img);
-            userProfileUrl = itemView.findViewById(R.id.postlistrow_avatar_img);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -96,6 +114,11 @@ public class HomeFragment extends Fragment {
 
     class PostRecyclerAdapter extends RecyclerView.Adapter<PostViewHolder>{
         OnItemClickListener Listener;
+        List<Post> posts;
+        public void setData(List<Post> data){
+            this.posts = data;
+            notifyDataSetChanged();
+        }
         void setOnItemClickListener(OnItemClickListener listener){
             this.Listener = listener;
         }
@@ -122,4 +145,6 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
+
+
 }

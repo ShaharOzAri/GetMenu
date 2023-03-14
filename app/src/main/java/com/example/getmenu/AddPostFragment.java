@@ -3,9 +3,16 @@ package com.example.getmenu;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavAction;
+import androidx.navigation.Navigation;
 
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,9 +35,15 @@ public class AddPostFragment extends Fragment {
 
         saveBtn.setOnClickListener(view1 -> {
             String name = nameEt.getText().toString();
+            Post post= new Post();
+            post.setTitle(name);
+            post.setId("15");
+            Model.instance().addPost(post,()->{
+                Navigation.findNavController(view1).popBackStack();
+            });
         });
 
-//        cancelBtn.setOnClickListener(view1 -> finish());
+        cancelBtn.setOnClickListener(view1 -> Navigation.findNavController(view1).popBackStack());
 
         return view;
     }

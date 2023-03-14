@@ -35,6 +35,7 @@
         android:id="@+id/ShowPost_post_img"
         android:layout_width="319dp"
         android:layout_height="365dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ShowPost_author_name_tv"
