@@ -8,43 +8,99 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.getmenu.ui.home.HomeFragment"
-        android:label="Feed"
-        tools:layout="@layout/fragment_home">
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_nav_home_to_addPostFragment"
             app:destination="@id/addPostFragment" />
         <action
             android:id="@+id/action_nav_home_to_showPostFragment"
-            app:destination="@id/showPostFragment">
-            <argument
-                android:name="PostId"
-                android:defaultValue="0" />
-        </action>
+            app:destination="@id/showPostFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/nav_posts"
+        android:id="@+id/nav_gallery"
         android:name="com.example.getmenu.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_account"
-        android:name="com.example.getmenu.ui.MyAccount.MyAccountFragment"
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.getmenu.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_slideshow" >
+        <action
+            android:id="@+id/action_nav_slideshow_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_nav_slideshow_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addPostFragment"
         android:name="com.example.getmenu.AddPostFragment"
-        android:label="Add Post"
+        android:label="fragment_add_post"
         tools:layout="@layout/fragment_add_post" />
     <fragment
         android:id="@+id/showPostFragment"
         android:name="com.example.getmenu.ShowPostFragment"
-        android:label="Post "
-        tools:layout="@layout/fragment_show_post">
+        android:label="fragment_show_post"
+        tools:layout="@layout/fragment_show_post" >
         <argument
-            android:name="postID"
+            android:name="PostId"
             app:argType="string" />
-    </fragment><action android:id="@+id/action_global_addPostFragment" app:destination="@id/addPostFragment"/>
+        <argument
+            android:name="PostTitle"
+            app:argType="string" />
+        <argument android:name="PostUserName"
+            app:argType="string" />
+        <argument
+            android:name="PostUserId"
+            app:argType="string" />
+        <argument android:name="PostImageUrl"
+            app:argType="string" />
+        <argument
+            android:name="PostUserProfileUrl"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_showPostFragment_to_editPostFragment2"
+            app:destination="@id/editPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editPostFragment"
+        android:name="com.example.getmenu.EditPostFragment"
+        android:label="fragment_edit_post"
+        tools:layout="@layout/fragment_edit_post" >
+        <argument
+            android:name="PostId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.getmenu.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.getmenu.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.getmenu.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.getmenu.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment><action android:id="@+id/action_global_signupFragment" app:destination="@id/signupFragment"/>
 </navigation>
