@@ -7,41 +7,56 @@
     android:layout_height="match_parent"
     tools:context=".EditProfileFragment" >
 
-    <Button
-        android:id="@+id/editprofile_save_btn"
-        android:layout_width="376dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="5dp"
-        android:backgroundTint="#DDD1BF"
-        android:text="SAVE CHANGES"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editprofile_name_pt" />
+    <ScrollView
+        android:id="@+id/ScrollViewEditProfile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/editprofile_img"
-        android:layout_width="153dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="150dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_menu_camera"
-        tools:src="@tools:sample/avatars" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-    <EditText
-        android:id="@+id/editprofile_name_pt"
-        android:layout_width="276dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="70dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editprofile_img" />
+            <Button
+                android:id="@+id/editprofile_save_btn"
+                android:layout_width="376dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="#DDD1BF"
+                android:text="SAVE CHANGES"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editprofile_name_pt" />
+
+            <ImageView
+                android:id="@+id/editprofile_img"
+                android:layout_width="153dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="150dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_menu_camera"
+                tools:src="@tools:sample/avatars" />
+
+            <EditText
+                android:id="@+id/editprofile_name_pt"
+                android:layout_width="276dp"
+                android:layout_height="59dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="5dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editprofile_img" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
