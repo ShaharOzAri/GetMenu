@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "77733945506",
+    "project_id": "getmenu-f72f6",
+    "storage_bucket": "getmenu-f72f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77733945506:android:52db354c6b4a776d9bb7fb",
+        "android_client_info": {
+          "package_name": "com.example.getmenu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77733945506-nflutisavif5d9jaf6lgvf7iq7g6d1ce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBLX5vPx9_dnuR25bYof0PqcACiuSrO1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77733945506-nflutisavif5d9jaf6lgvf7iq7g6d1ce.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

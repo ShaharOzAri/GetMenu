@@ -2,32 +2,22 @@ package com.example.getmenu.ui.home;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.service.dreams.DreamService;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.getmenu.AddPostFragment;
 import com.example.getmenu.Model.Model;
 import com.example.getmenu.Model.Post;
 import com.example.getmenu.R;
 import com.example.getmenu.databinding.FragmentHomeBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -62,7 +52,6 @@ public class HomeFragment extends Fragment {
         });
 
         reloadData();
-
         return view;
 
     }

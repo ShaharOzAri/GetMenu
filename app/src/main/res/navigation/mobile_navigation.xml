@@ -19,12 +19,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.getmenu.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
         android:id="@+id/addPostFragment"
         android:name="com.example.getmenu.AddPostFragment"
         android:label="fragment_add_post"
@@ -92,11 +86,13 @@
             app:destination="@id/nav_home" />
     </fragment><action android:id="@+id/action_global_signupFragment" app:destination="@id/signupFragment"/>
     <fragment
-        android:id="@+id/myAccountFragment"
-        android:name="com.example.getmenu.ui.MyAccount.MyAccountFragment"
-        android:label="MyAccountFragment" >
-        <action
-            android:id="@+id/action_myAccountFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-    </fragment>
+        android:id="@+id/nav_gallery"
+        android:name="com.example.getmenu.ui.gallery.GalleryFragment"
+        android:label="Gallery"
+        tools:layout="@layout/fragment_gallery"/>
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.getmenu.ProfileFragment"
+        android:label="MyAccountFragment"
+        tools:layout="@layout/fragment_profile"/>
 </navigation>

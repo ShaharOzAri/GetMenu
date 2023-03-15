@@ -8,7 +8,7 @@ import com.example.getmenu.MyApplication;
 import com.example.getmenu.Model.Dao.PostDao;
 
 
-@Database(entities = {Post.class}, version = 2)
+@Database(entities = {Post.class}, version = 3)
 abstract class AppLocalDbRepository extends RoomDatabase {
     public abstract PostDao postDao();
 }

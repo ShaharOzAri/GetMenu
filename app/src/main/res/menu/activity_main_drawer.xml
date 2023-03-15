@@ -9,11 +9,11 @@
             android:icon="@android:drawable/btn_star_big_on"
             android:title="Feed" />
         <item
-            android:id="@+id/nav_posts"
+            android:id="@+id/nav_gallery"
             android:icon="@android:drawable/checkbox_on_background"
             android:title="My Posts" />
         <item
-            android:id="@+id/nav_account"
+            android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="My Account" />
     </group>

@@ -37,7 +37,6 @@ public class AddPostFragment extends Fragment {
             String name = nameEt.getText().toString();
             Post post= new Post();
             post.setTitle(name);
-            post.setId("15");
             Model.instance().addPost(post,()->{
                 Navigation.findNavController(view1).popBackStack();
             });

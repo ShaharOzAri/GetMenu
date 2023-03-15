@@ -10,11 +10,11 @@ import java.io.Serializable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-//import com.google.firebase.Timestamp;
+import com.google.firebase.Timestamp;
 
 import org.jetbrains.annotations.NotNull;
 
-//import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FieldValue;
 
 
 @Entity
@@ -41,16 +41,16 @@ public class Post implements Serializable {
     Long timestamp = new Long(0);
     Long updateDate = new Long(0);
 
-    public Post(int i) {
-        id = String.valueOf(i);
-        title = "test";
+    public Post(String i , String title) {
+        id = i;
+        this.title = title;
         userName = "shahar";
         postImageUrl = "https://cdn.onecklace.com/products/2653/product_2653_1_730.jpeg";
         userProfileUrl = "https://cdn.onecklace.com/products/2653/product_2653_model_1_730.jpeg";
     }
 
     public Post(){}
-    public Map<String, Object> toJson(String action) {
+    public Map<String, Object> toJson() {
         Map<String, Object> json = new HashMap<String, Object>();
 
         json.put("id", id);
@@ -61,15 +61,15 @@ public class Post implements Serializable {
         json.put("title", title);
         json.put("isDeleted", isDeleted);
         json.put("imageVersion", imageVersion);
-//        json.put("updateDate", FieldValue.serverTimestamp());
-
+        json.put("updateDate", FieldValue.serverTimestamp());
+//
 //        if ("create".equals(action)) {
 //            json.put("timestamp", FieldValue.serverTimestamp());
 //        } else {
 //            Timestamp ts = getServerTimestamp(timestamp);
 //            json.put("timestamp", ts);
 //        }
-
+//
         return json;
     }
 
