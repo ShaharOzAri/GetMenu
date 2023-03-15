@@ -8,11 +8,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.getmenu.R;
 import com.example.getmenu.databinding.FragmentGalleryBinding;
 import com.example.getmenu.databinding.FragmentSlideshowBinding;
-import com.example.getmenu.ui.slideshow.SlideshowViewModel;
+import com.example.getmenu.ui.post.DisplayPostsFragment;
 
 public class GalleryFragment extends Fragment {
 
@@ -28,6 +30,7 @@ public class GalleryFragment extends Fragment {
         galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
+
 
     @Override
     public void onDestroyView() {

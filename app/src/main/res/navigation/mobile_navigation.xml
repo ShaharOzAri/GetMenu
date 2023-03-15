@@ -94,5 +94,19 @@
         android:id="@+id/nav_profile"
         android:name="com.example.getmenu.ProfileFragment"
         android:label="MyAccountFragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/displayPostsFragment"
+        android:name="com.example.getmenu.ui.post.DisplayPostsFragment"
+        android:label="fragment_display_posts"
+        tools:layout="@layout/fragment_display_posts" >
+        <action
+            android:id="@+id/action_displayPostsFragment_to_showPostFragment"
+            app:destination="@id/showPostFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_showPostFragment" app:destination="@id/showPostFragment" /><action android:id="@+id/action_global_nav_profile" app:destination="@id/nav_profile"/>
 </navigation>

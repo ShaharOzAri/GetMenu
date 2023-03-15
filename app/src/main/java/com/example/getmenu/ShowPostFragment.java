@@ -9,9 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ShowPostFragment extends Fragment {
     @Override
@@ -25,6 +24,12 @@ public class ShowPostFragment extends Fragment {
         Button editBtn = view.findViewById(R.id.showpost_edit_btn);
         editBtn.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigate(R.id.action_showPostFragment_to_editPostFragment2);
+        });
+
+        ImageView userImage = view.findViewById(R.id.ShowPost_author_avatar_img);
+        userImage.setOnClickListener(view1 -> {
+            MobileNavigationDirections.ActionGlobalNavProfile action = ShowPostFragmentDirections.actionGlobalNavProfile("dvb");
+            Navigation.findNavController(view).navigate(action);
         });
 
         TextView name = view.findViewById(R.id.ShowPost_author_name_tv);
