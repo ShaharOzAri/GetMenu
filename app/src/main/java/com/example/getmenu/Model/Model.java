@@ -1,5 +1,6 @@
 package com.example.getmenu.Model;
 
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import androidx.core.os.HandlerCompat;
@@ -20,11 +21,15 @@ public class Model {
 
     private Model(){
     }
-    public interface GetAllPostsListener{
-        void onComplete(List<Post> data);
+    public interface Listener<T> {
+        void onComplete(T data);
     }
-    public void getAllPosts(GetAllPostsListener callback){
-        fireBaseModel.getAllPosts(callback);
+
+    public interface AddUserListener {
+        void onComplete();
+    }
+    public void getAllPosts(Listener callback){
+        fireBaseModel.getAllPosts(new Long(5221) , callback);
 //        executor.execute(()->{
 //            List<Post> data =  localDb.postDao().getAllPosts();
 //            try {
@@ -36,6 +41,8 @@ public class Model {
 //        });
     }
 
+
+
     public interface AddPostListener{
         void onComplete();
     }
@@ -44,12 +51,18 @@ public class Model {
 //        return data.get(i);
 //    }
 
-    public void addPost(Post post , AddPostListener listener){
-        fireBaseModel.addPost(post,listener);
+    public void addPost(Post post , Uri imageUri, AddPostListener listener){
+        executor.execute(() -> {
+            FireBaseModel.addPost(post, imageUri, listener);
+        });
 //        executor.execute(()->{
 //            localDb.postDao().insertAll(post);
 //            mainHandler.post(()->listener.onComplete());
 //        });
+    }
+
+    public void addUser(User user, Uri imageUri, AddUserListener addUserListener) {
+        executor.execute(() -> fireBaseModel.addUser(user, imageUri, addUserListener));
     }
 
 //    public void removeStudent(Post post){

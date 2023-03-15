@@ -3,6 +3,7 @@ package com.example.getmenu;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultCallback;
@@ -59,7 +60,7 @@ public class AddPostFragment extends Fragment {
             Post post= new Post();
             post.setTitle(title);
             post.setId("1");
-            Model.instance().addPost(post,()->{
+            Model.instance().addPost(post, Uri.EMPTY,()->{
                 Navigation.findNavController(view1).popBackStack();
             });
         });

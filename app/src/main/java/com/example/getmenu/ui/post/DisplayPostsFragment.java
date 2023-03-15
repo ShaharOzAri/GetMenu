@@ -80,7 +80,7 @@ public class DisplayPostsFragment extends Fragment {
     void reloadData(){
         binding.progressBar.setVisibility(View.VISIBLE);
         Model.instance().getAllPosts((postList)->{
-            data = postList;
+            data = (List<Post>) postList;
             adapter.setData(data);
             binding.progressBar.setVisibility(View.GONE);
         });

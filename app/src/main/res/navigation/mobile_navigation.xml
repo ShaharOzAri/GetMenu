@@ -109,4 +109,9 @@
             app:destination="@id/showPostFragment" />
     </fragment>
     <action android:id="@+id/action_global_showPostFragment" app:destination="@id/showPostFragment" /><action android:id="@+id/action_global_nav_profile" app:destination="@id/nav_profile"/>
+    <activity
+        android:id="@+id/start_activity"
+        android:name="com.example.getmenu.start_activity"
+        android:label="activity_start"
+        tools:layout="@layout/activity_start" />
 </navigation>
