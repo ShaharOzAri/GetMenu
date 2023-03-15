@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavAction;
 import androidx.navigation.Navigation;
 
+import android.provider.MediaStore;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,10 +32,13 @@ import com.example.getmenu.Model.Post;
 import com.example.getmenu.databinding.FragmentAddPostBinding;
 import com.example.getmenu.ui.home.HomeFragment;
 
+import java.io.ByteArrayOutputStream;
+
 public class AddPostFragment extends Fragment {
 
     FragmentAddPostBinding binding;
     ActivityResultLauncher<Void> cameraLauncher;
+    Uri imageUri;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +49,10 @@ public class AddPostFragment extends Fragment {
             public void onActivityResult(Bitmap result) {
                 if(result != null){
                     binding.addPostAvatarImg.setImageBitmap(result);
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    result.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                    String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), result, "Title", null);
+                    imageUri =  Uri.parse(path);
                 }
             }
         });
@@ -56,11 +64,16 @@ public class AddPostFragment extends Fragment {
         View view =binding.getRoot();
 
         binding.addPostSaveBtn.setOnClickListener(view1 -> {
-            String title = binding.addPostTitlePt.getText().toString();
             Post post= new Post();
+
+            String title = binding.addPostTitlePt.getText().toString();
             post.setTitle(title);
-            post.setId("1");
-            Model.instance().addPost(post, Uri.EMPTY,()->{
+
+            post.setUserId(MyApplication.user.getId());
+            post.setUserName(MyApplication.user.getName());
+            post.setUserProfileUrl(MyApplication.user.getProfileImageUrl());
+
+            Model.instance().addPost(post, imageUri,()->{
                 Navigation.findNavController(view1).popBackStack();
             });
         });
@@ -77,4 +90,6 @@ public class AddPostFragment extends Fragment {
 
         return view;
     }
+
+
 }

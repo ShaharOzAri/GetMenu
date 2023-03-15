@@ -1,42 +1,33 @@
 package com.example.getmenu.ui.post;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.getmenu.MobileNavigationDirections;
 import com.example.getmenu.Model.Model;
 import com.example.getmenu.Model.Post;
-import com.example.getmenu.ProfileFragment;
 import com.example.getmenu.R;
 import com.example.getmenu.databinding.FragmentDisplayPostsBinding;
-import com.example.getmenu.databinding.FragmentHomeBinding;
-import com.example.getmenu.ui.home.HomeFragmentDirections;
-import com.example.getmenu.ui.post.DisplayPostsFragment;
-import com.example.getmenu.ui.post.DisplayPostsFragmentDirections;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import java.util.LinkedList;
-import java.util.List;
+
+import com.squareup.picasso.Picasso;
 
 public class DisplayPostsFragment extends Fragment {
     String userId = null;
     FragmentDisplayPostsBinding binding;
-    List<Post> data = new LinkedList<>();
     PostRecyclerAdapter adapter;
-    DrawerLayout drawerLayout;
+    DisplayPostViewModel displayPostViewModel;
+    View view;
+
     public DisplayPostsFragment(String userId){
         this.userId = userId;
     }
@@ -47,20 +38,25 @@ public class DisplayPostsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        displayPostViewModel = new ViewModelProvider(this).get(DisplayPostViewModel.class);
         binding = FragmentDisplayPostsBinding.inflate(inflater,container,false);
-        View view = binding.getRoot();
+        view = binding.getRoot();
 
         adapter = new PostRecyclerAdapter();
         binding.postrecyclerList.setHasFixedSize(true);
         binding.postrecyclerList.setAdapter(adapter);
 
         binding.postrecyclerList.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
+        displayPostViewModel.getData().observe(getViewLifecycleOwner(), list -> {
+            refresh();
+        });
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                Post ps = data.get(pos);
-                MobileNavigationDirections.ActionGlobalShowPostFragment action = DisplayPostsFragmentDirections.actionGlobalShowPostFragment(ps.getId(),ps.getTitle(),ps.getUserName(),ps.getUserId(),ps.getPostImageUrl(),ps.getUserProfileUrl());
+                Post ps = displayPostViewModel.getData().getValue().get(pos);
+                MobileNavigationDirections.ActionGlobalShowPostFragment action =
+                        DisplayPostsFragmentDirections.actionGlobalShowPostFragment(
+                                ps.getId(),ps.getTitle(),ps.getUserName(),ps.getUserId(),ps.getPostImageUrl(),ps.getUserProfileUrl());
                 Navigation.findNavController(view).navigate(action);
 
             }
@@ -71,6 +67,14 @@ public class DisplayPostsFragment extends Fragment {
     }
 
 
+    public void refresh() {
+        binding.progressBar.setVisibility(View.VISIBLE);
+        adapter.notifyDataSetChanged();
+        binding.progressBar.setVisibility(View.GONE);
+
+//        swipeRefreshLayout.setRefreshing(false);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -79,11 +83,7 @@ public class DisplayPostsFragment extends Fragment {
 
     void reloadData(){
         binding.progressBar.setVisibility(View.VISIBLE);
-        Model.instance().getAllPosts((postList)->{
-            data = (List<Post>) postList;
-            adapter.setData(data);
-            binding.progressBar.setVisibility(View.GONE);
-        });
+        Model.instance().getAllPosts();
     }
 
 
@@ -97,7 +97,20 @@ public class DisplayPostsFragment extends Fragment {
             super(itemView);
             title = itemView.findViewById(R.id.postlistrow_title_tv);
             userName = itemView.findViewById(R.id.postlistrow_name_tv);
+            postImageUrl = itemView.findViewById(R.id.postlistrow_post_img);
+            userProfileUrl = itemView.findViewById(R.id.postlistrow_avatar_img);
 
+            userProfileUrl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view1) {
+                    Post post = new Post();
+                    post = displayPostViewModel.getData().getValue().get(getAdapterPosition());
+//                    Navigation.findNavController(view).navigate(DisplayPostsFragmentDirections.actionDisplayPostsFragmentToNavProfile(post));
+                    com.example.getmenu.MobileNavigationDirections.ActionGlobalNavProfile action = DisplayPostsFragmentDirections.actionGlobalNavProfile(post);
+
+                    Navigation.findNavController(view1).navigate(action);
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -109,7 +122,13 @@ public class DisplayPostsFragment extends Fragment {
 
         public void bind(Post post , int pos) {
             title.setText(post.getTitle());
-            userName.setText(String.valueOf(post.getUserName()));
+            if(post != null && !post.getUserProfileUrl().isEmpty()){
+                Picasso.get().load(post.getUserProfileUrl()).noPlaceholder().into(this.userProfileUrl);
+            }
+            if(post != null && !post.getPostImageUrl().isEmpty()){
+                Picasso.get().load(post.getPostImageUrl()).noPlaceholder().into(this.postImageUrl);
+            }
+            userName.setText(post.getUserName());
         }
     }
 
@@ -119,12 +138,7 @@ public class DisplayPostsFragment extends Fragment {
 
     class PostRecyclerAdapter extends RecyclerView.Adapter<PostViewHolder>{
         OnItemClickListener Listener;
-        List<Post> posts;
 
-        public void setData(List<Post> data){
-            this.posts = data;
-            notifyDataSetChanged();
-        }
         void setOnItemClickListener(OnItemClickListener listener){
             this.Listener = listener;
         }
@@ -137,13 +151,17 @@ public class DisplayPostsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
-            Post post = data.get(position);
-            holder.bind(post , position);
+            Post ps = displayPostViewModel.getData().getValue().get(position);
+            holder.bind(ps , position);
         }
 
         @Override
         public int getItemCount() {
-            return data.size();
+            if (displayPostViewModel.getData().getValue() == null) {
+                return 0;
+            }
+
+            return displayPostViewModel.getData().getValue().size();
         }
     }
 

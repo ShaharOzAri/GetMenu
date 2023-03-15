@@ -26,11 +26,11 @@ public class ShowPostFragment extends Fragment {
             Navigation.findNavController(view1).navigate(R.id.action_showPostFragment_to_editPostFragment2);
         });
 
-        ImageView userImage = view.findViewById(R.id.ShowPost_author_avatar_img);
-        userImage.setOnClickListener(view1 -> {
-            MobileNavigationDirections.ActionGlobalNavProfile action = ShowPostFragmentDirections.actionGlobalNavProfile("dvb");
-            Navigation.findNavController(view).navigate(action);
-        });
+//        ImageView userImage = view.findViewById(R.id.ShowPost_author_avatar_img);
+//        userImage.setOnClickListener(view1 -> {
+//            MobileNavigationDirections.ActionGlobalNavProfile action = ShowPostFragmentDirections.actionGlobalNavProfile("dvb");
+//            Navigation.findNavController(view).navigate(action);
+//        });
 
         TextView name = view.findViewById(R.id.ShowPost_author_name_tv);
         name.setText(postUserName);
