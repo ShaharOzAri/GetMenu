@@ -8,12 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.getmenu.databinding.FragmentEditPostBinding;
+import com.example.getmenu.databinding.FragmentHomeBinding;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link EditPostFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class EditPostFragment extends Fragment {
+    FragmentEditPostBinding binding;
+    View view;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +64,10 @@ public class EditPostFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_post, container, false);
+        binding = FragmentEditPostBinding.inflate(inflater,container,false);
+        view = binding.getRoot();
+
+        return view;
+
     }
 }

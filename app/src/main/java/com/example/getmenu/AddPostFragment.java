@@ -40,6 +40,9 @@ public class AddPostFragment extends Fragment {
     ActivityResultLauncher<Void> cameraLauncher;
     Uri imageUri;
 
+    ActivityResultLauncher<String> galleryAppLauncher;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,16 @@ public class AddPostFragment extends Fragment {
                     result.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
                     String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), result, "Title", null);
                     imageUri =  Uri.parse(path);
+                }
+            }
+        });
+
+        galleryAppLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri result) {
+                if (result != null){
+                    binding.addPostAvatarImg.setImageURI(result);
+                    imageUri = result;
                 }
             }
         });
@@ -85,7 +98,7 @@ public class AddPostFragment extends Fragment {
         });
 
         binding.addPostGalleryImgbtn.setOnClickListener(view1 -> {
-
+            galleryAppLauncher.launch("image/*");
         });
 
         return view;
