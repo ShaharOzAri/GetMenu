@@ -96,9 +96,15 @@
         android:label="MyAccountFragment"
         tools:layout="@layout/fragment_profile">
         <argument
-            android:name="userId"
-            app:argType="string" />
+            android:name="post"
+            app:argType="com.example.getmenu.Model.Post" />
     </fragment>
+    <action android:id="@+id/action_global_showPostFragment" app:destination="@id/showPostFragment" />
+    <activity
+        android:id="@+id/start_activity"
+        android:name="com.example.getmenu.start_activity"
+        android:label="activity_start"
+        tools:layout="@layout/activity_start" />
     <fragment
         android:id="@+id/displayPostsFragment"
         android:name="com.example.getmenu.ui.post.DisplayPostsFragment"
@@ -107,6 +113,5 @@
         <action
             android:id="@+id/action_displayPostsFragment_to_showPostFragment"
             app:destination="@id/showPostFragment" />
-    </fragment>
-    <action android:id="@+id/action_global_showPostFragment" app:destination="@id/showPostFragment" /><action android:id="@+id/action_global_nav_profile" app:destination="@id/nav_profile"/>
+    </fragment><action android:id="@+id/action_global_nav_profile" app:destination="@id/nav_profile"/>
 </navigation>

@@ -50,7 +50,7 @@ public class Post implements Serializable {
     }
 
     public Post(){}
-    public Map<String, Object> toJson() {
+    public Map<String, Object> toJson(String action) {
         Map<String, Object> json = new HashMap<String, Object>();
 
         json.put("id", id);
