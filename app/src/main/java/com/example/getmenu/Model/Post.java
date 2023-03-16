@@ -32,6 +32,8 @@ public class Post implements Serializable {
     String userName = "";
     String postImageUrl = "";
     String userProfileUrl = "";
+    String description = "";
+    String avgPrice = "";
 
 
     int imageVersion = 0;
@@ -59,6 +61,8 @@ public class Post implements Serializable {
         json.put("userProfileUrl", userProfileUrl);
         json.put("postImageUrl", postImageUrl);
         json.put("title", title);
+        json.put("description", description);
+        json.put("avgPrice", avgPrice);
         json.put("isDeleted", isDeleted);
         json.put("imageVersion", imageVersion);
         json.put("updateDate", FieldValue.serverTimestamp());
@@ -99,6 +103,14 @@ public class Post implements Serializable {
 
         if (json.containsKey("userProfileUrl")) {
             post.setUserProfileUrl((String) json.get("userProfileUrl"));
+        }
+
+        if (json.containsKey("description")) {
+            post.setDescription((String) json.get("description"));
+        }
+
+        if (json.containsKey("avgPrice")) {
+            post.setAvgPrice((String) json.get("avgPrice"));
         }
 
         if (json.containsKey("isDeleted")) {
@@ -160,6 +172,14 @@ public class Post implements Serializable {
         return userId;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public String getAvgPrice() {
+        return avgPrice;
+    }
+
     public Long getUpdateDate() {
         return updateDate;
     }
@@ -188,6 +208,14 @@ public class Post implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setAvgPrice(String avgPrice) {
+        this.avgPrice = avgPrice;
     }
 
     public void setUserId(String userId) {

@@ -47,6 +47,11 @@
         <action
             android:id="@+id/action_showPostFragment_to_editPostFragment2"
             app:destination="@id/editPostFragment" />
+        <argument
+            android:name="PostDescription"
+            app:argType="string" />
+        <argument android:name="PostAvgPrice"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/editPostFragment"

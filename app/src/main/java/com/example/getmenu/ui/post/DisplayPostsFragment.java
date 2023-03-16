@@ -56,7 +56,7 @@ public class DisplayPostsFragment extends Fragment {
                 Post ps = displayPostViewModel.getData().getValue().get(pos);
                 MobileNavigationDirections.ActionGlobalShowPostFragment action =
                         DisplayPostsFragmentDirections.actionGlobalShowPostFragment(
-                                ps.getId(),ps.getTitle(),ps.getUserName(),ps.getUserId(),ps.getPostImageUrl(),ps.getUserProfileUrl());
+                                ps.getId(),ps.getTitle(),ps.getUserName(),ps.getUserId(),ps.getPostImageUrl(),ps.getUserProfileUrl(),ps.getDescription(),ps.getAvgPrice());
                 Navigation.findNavController(view).navigate(action);
 
             }
@@ -92,6 +92,8 @@ public class DisplayPostsFragment extends Fragment {
         TextView userName;
         ImageView postImageUrl;
         ImageView userProfileUrl;
+        TextView description;
+        TextView avgPrice;
 
         public PostViewHolder(@NonNull View itemView , OnItemClickListener listener) {
             super(itemView);
@@ -99,6 +101,8 @@ public class DisplayPostsFragment extends Fragment {
             userName = itemView.findViewById(R.id.postlistrow_name_tv);
             postImageUrl = itemView.findViewById(R.id.postlistrow_post_img);
             userProfileUrl = itemView.findViewById(R.id.postlistrow_avatar_img);
+            description = itemView.findViewById(R.id.postlistrow_description_tv);
+            avgPrice = itemView.findViewById(R.id.postlisrow_avgPrice_tv);
 
             userProfileUrl.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -122,6 +126,8 @@ public class DisplayPostsFragment extends Fragment {
 
         public void bind(Post post , int pos) {
             title.setText(post.getTitle());
+            description.setText(post.getDescription());
+            avgPrice.setText(post.getAvgPrice());
             if(post != null && !post.getUserProfileUrl().isEmpty()){
                 Picasso.get().load(post.getUserProfileUrl()).noPlaceholder().into(this.userProfileUrl);
             }

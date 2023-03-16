@@ -81,6 +81,10 @@ public class AddPostFragment extends Fragment {
 
             String title = binding.addPostTitlePt.getText().toString();
             post.setTitle(title);
+            String description = binding.addPostDescriptionPt.getText().toString();
+            post.setDescription(description);
+            String avgPrice = binding.addPostAvgpricePt.getText().toString();
+            post.setAvgPrice(avgPrice);
 
             post.setUserId(MyApplication.user.getId());
             post.setUserName(MyApplication.user.getName());
