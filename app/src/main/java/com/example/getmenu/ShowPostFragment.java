@@ -26,6 +26,8 @@ public class ShowPostFragment extends Fragment {
 
         String postUserName = ShowPostFragmentArgs.fromBundle(getArguments()).getPostUserName();
         String postTitle = ShowPostFragmentArgs.fromBundle(getArguments()).getPostTitle();
+        String postDescription = ShowPostFragmentArgs.fromBundle(getArguments()).getPostDescription();
+        String postAvgPrice = ShowPostFragmentArgs.fromBundle(getArguments()).getPostAvgPrice();
         String postAvatarImage = ShowPostFragmentArgs.fromBundle(getArguments()).getPostUserProfileUrl();
         String postImage = ShowPostFragmentArgs.fromBundle(getArguments()).getPostImageUrl();
 
@@ -44,6 +46,10 @@ public class ShowPostFragment extends Fragment {
         name.setText(postUserName);
         TextView title = view.findViewById(R.id.ShowPost_title_tv);
         title.setText(postTitle);
+        TextView description = view.findViewById(R.id.ShowPost_description_tv);
+        description.setText(postDescription);
+        TextView avgPrice = view.findViewById(R.id.ShowPost_avgprice_tv);
+        avgPrice.setText(postAvgPrice);
         ImageView avatarImg = view.findViewById(R.id.ShowPost_author_avatar_img);
         Picasso.get().load(Uri.parse(postAvatarImage)).into(avatarImg);
         ImageView image = view.findViewById(R.id.ShowPost_post_img);

@@ -20,7 +20,7 @@
                 android:id="@+id/editpost_changeimg_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="60dp"
                 android:text="change img"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
             <Button
                 android:id="@+id/editpost_save_btn"
                 android:layout_width="156dp"
-                android:layout_height="69dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="5dp"
@@ -41,12 +41,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/editpost_delete_btn"
-                app:layout_constraintTop_toBottomOf="@+id/editpost_title_pt" />
+                app:layout_constraintTop_toBottomOf="@+id/editpost_avgprice_pt" />
 
             <Button
                 android:id="@+id/editpost_delete_btn"
                 android:layout_width="162dp"
-                android:layout_height="64dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="5dp"
@@ -56,40 +56,112 @@
                 app:layout_constraintEnd_toStartOf="@+id/editpost_save_btn"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editpost_title_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/editpost_avgprice_tv" />
 
             <ImageView
                 android:id="@+id/editpost_img"
                 android:layout_width="200dp"
                 android:layout_height="240dp"
+                android:layout_marginTop="15dp"
                 android:src="@drawable/ic_menu_gallery"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editpost_changeimg_tv" />
 
             <TextView
                 android:id="@+id/editpost_title_tv"
-                android:layout_width="86dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="36dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:text="Title"
                 android:textSize="34sp"
                 app:layout_constraintEnd_toStartOf="@+id/editpost_title_pt"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editpost_img" />
+                app:layout_constraintTop_toBottomOf="@+id/editpost_camera_imgbtn" />
+
+            <TextView
+                android:id="@+id/editpost_description_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Description"
+                android:textSize="34sp"
+                app:layout_constraintEnd_toStartOf="@+id/editpost_description_pt"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editpost_title_tv" />
+
+            <TextView
+                android:id="@+id/editpost_avgprice_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Avg Price"
+                android:textSize="34sp"
+                app:layout_constraintEnd_toStartOf="@+id/editpost_avgprice_pt"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editpost_description_tv" />
 
             <EditText
                 android:id="@+id/editpost_title_pt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/editpost_title_tv"
+                app:layout_constraintTop_toBottomOf="@+id/editpost_gallery_imgbtn" />
+
+            <ImageButton
+                android:id="@+id/editpost_camera_imgbtn"
+                android:layout_width="95dp"
+                android:layout_height="63dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_baseline_camera_alt_24"
+                app:layout_constraintEnd_toStartOf="@+id/editpost_gallery_imgbtn"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editpost_img" />
+
+            <ImageButton
+                android:id="@+id/editpost_gallery_imgbtn"
+                android:layout_width="88dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_baseline_photo_camera_back_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/editpost_camera_imgbtn"
+                app:layout_constraintTop_toBottomOf="@+id/editpost_img" />
+
+            <EditText
+                android:id="@+id/editpost_description_pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/editpost_description_tv"
+                app:layout_constraintTop_toBottomOf="@+id/editpost_title_pt" />
+
+            <EditText
+                android:id="@+id/editpost_avgprice_pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/editpost_avgprice_tv"
+                app:layout_constraintTop_toBottomOf="@+id/editpost_description_pt" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
