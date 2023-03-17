@@ -250,5 +250,35 @@ public class FireBaseModel {
         MyApplication.signOut();
     }
 
+    public static void getUserById(String id,Model.GetUserListener listener){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection(User.COLLECTION_NAME)
+                .whereEqualTo("id", id).get()
+                .addOnCompleteListener(task -> {
+                    User user = new User();
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot doc : task.getResult()) {
+                            user = User.create(doc.getData());
+                        }
+                    }
+                    listener.onComplete(user);
+                });
+
+
+
+
+//         db.collection(User.COLLECTION_NAME).document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                User user = new User();
+//                if (task.isSuccessful()) {
+//                    user = User.create(task.getResult().getData());
+//                }
+//                listener.onComplete(user);
+//            }
+//        });
+    }
+
 
 }

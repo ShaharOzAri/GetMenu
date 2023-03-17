@@ -1,5 +1,6 @@
 package com.example.getmenu.Model;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
@@ -8,6 +9,7 @@ import androidx.core.os.HandlerCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.getmenu.Model.Dao.PostDao;
 import com.example.getmenu.MyApplication;
 import com.example.getmenu.Utils;
 
@@ -42,11 +44,19 @@ public class Model {
     public interface AddUserListener {
         void onComplete();
     }
+
+    public interface GetUserListener {
+        void onComplete(User user);
+    }
     public LiveData<List<Post>> getAllPosts() {
         refreshPostsList();
         return allPosts;
     }
 
+
+    public void clearPostRoom(){
+        AppLocalDb.db.postDao().deleteAll();
+    }
     public void refreshPostsList() {
 
         //************************************************************************
@@ -97,8 +107,29 @@ public class Model {
         });
     }
 
+    @SuppressLint("StaticFieldLeak")
+    public void editPost(Post post, Uri imageUri, FireBaseModel.Listener<Boolean> listener) {
+        boolean imageUpdated;
+
+        if (imageUri == null) {
+            imageUpdated = false;
+
+        } else {
+            imageUpdated = true;
+            post.setImageVersion(post.getImageVersion() + 1);
+        }
+
+        executor.execute(() -> {
+            FireBaseModel.editPost(post, imageUri, imageUpdated, listener);
+        });
+    }
 
 
+
+
+    public void deleteSinglePost(String id){
+        AppLocalDb.db.postDao().deleteById(id);
+    }
     public interface AddPostListener{
         void onComplete();
     }
@@ -111,14 +142,14 @@ public class Model {
         executor.execute(() -> {
             FireBaseModel.addPost(post, imageUri, listener);
         });
-//        executor.execute(()->{
-//            localDb.postDao().insertAll(post);
-//            mainHandler.post(()->listener.onComplete());
-//        });
     }
 
     public void addUser(User user, Uri imageUri, AddUserListener addUserListener) {
         executor.execute(() -> fireBaseModel.addUser(user, imageUri, addUserListener));
+    }
+
+    public void getUserById(String id , GetUserListener getUserListener){
+        executor.execute(() -> fireBaseModel.getUserById(id,getUserListener));
     }
 
 //    public void removeStudent(Post post){

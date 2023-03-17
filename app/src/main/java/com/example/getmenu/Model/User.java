@@ -40,7 +40,31 @@ public class User {
         return json;
     }
 
-    // Getters ------------------------------------------------------------------------
+    public static User create(Map<String, Object> json) {
+        User user = new User();
+
+        if (json.containsKey("id")) {
+            user.setId((String) json.get("id"));
+        }
+
+        if (json.containsKey("email")) {
+            user.setEmail((String) json.get("email"));
+        }
+
+        if (json.containsKey("name")) {
+            user.setName((String) json.get("name"));
+        }
+
+        if (json.containsKey("imageVersion")) {
+            user.setImageVersion(Integer.parseInt(json.get("imageVersion").toString()));
+        }
+
+        if (json.containsKey("profileImageUrl")) {
+            user.setProfileImageUrl((String) json.get("profileImageUrl"));
+        }
+        return user;
+    }
+        // Getters ------------------------------------------------------------------------
     public String getProfileImageUrl() {
         return profileImageUrl;
     }
