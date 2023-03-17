@@ -10,7 +10,7 @@
         android:id="@+id/register_activity_background_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#040404"
+        android:background="#EFECE6"
         android:src="@drawable/main_background" />
 
     <TextView
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="Share Your Travels"
+        android:text="Share Your Menu"
         android:textColor="#000000"
         android:textSize="36sp"
         android:visibility="visible"
@@ -156,6 +156,7 @@
             android:layout_marginEnd="0dp"
             android:layout_marginRight="0dp"
             android:layout_marginBottom="0dp"
+            android:backgroundTint="#DDD1BF"
             android:text="Register"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.getmenu.MobileNavigationDirections;
 import com.example.getmenu.Model.Model;
 import com.example.getmenu.Model.Post;
 import com.example.getmenu.Model.User;
@@ -44,6 +45,10 @@ public class ProfileFragment extends Fragment {
         if(user != null && !user.getProfileImageUrl().isEmpty()){
             Picasso.get().load(user.getProfileImageUrl()).noPlaceholder().into(profileImage);
         }
+//        binding.profileEditBtn.setOnClickListener(view1 -> {
+//            com.example.getmenu.MobileNavigationDirections.ActionGlobalEditProfileFragment action = ProfileFragmentDirections.actionGlobalEditProfileFragment(user);
+//        });
+
 
 
         Fragment displayPostsFragment = new DisplayPostsFragment(MyApplication.user.getId());
