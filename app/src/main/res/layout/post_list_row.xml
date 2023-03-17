@@ -8,81 +8,106 @@
     android:background="?attr/selectableItemBackground">
 
 
-    <ImageView
-        android:id="@+id/postlistrow_post_img"
-        android:layout_width="202dp"
-        android:layout_height="257dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postlisrow_avgPrice_tv"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:weightSum="8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/postlistrow_title_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="30dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/postlistrow_avatar_img"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:foregroundGravity="center_vertical"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/postlistrow_name_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postlistrow_avatar_img" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/postlistrow_avatar_img"
+                android:layout_width="111dp"
+                android:layout_height="92dp"
+                android:foregroundGravity="center_horizontal"
+                android:src="@android:drawable/ic_menu_camera"
+                app:civ_border_color="#9F9F9F"
+                app:civ_border_width="2dp"
+                tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/postlistrow_avatar_img"
-        android:layout_width="109dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/postlistrow_title_tv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_myplaces" />
+            <TextView
+                android:id="@+id/postlistrow_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/postlisrow_avgPrice_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="60dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/postlistrow_name_tv"
-        app:layout_constraintTop_toBottomOf="@+id/postlistrow_title_tv" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/postlistrow_description_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="5dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postlistrow_post_img" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:foregroundGravity="center_vertical|center|center_horizontal"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="8">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:gravity="center"
+                    android:text="Average Price Per Person:"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/postlisrow_avgPrice_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/postlistrow_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/postlistrow_description_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="TextView"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/postlistrow_post_img"
+                android:layout_width="173dp"
+                android:layout_height="180dp"
+                app:srcCompat="@drawable/ic_launcher_foreground" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,22 +41,20 @@ public class DisplayPostsFragment extends Fragment {
         displayPostViewModel = new ViewModelProvider(this).get(DisplayPostViewModel.class);
         binding = FragmentDisplayPostsBinding.inflate(inflater,container,false);
         view = binding.getRoot();
-
         adapter = new PostRecyclerAdapter();
         binding.postrecyclerList.setHasFixedSize(true);
         binding.postrecyclerList.setAdapter(adapter);
 
         binding.postrecyclerList.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        displayPostViewModel.getData().observe(getViewLifecycleOwner(), list -> {
+        displayPostViewModel.getData(userId).observe(getViewLifecycleOwner(), list -> {
             refresh();
         });
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                Post ps = displayPostViewModel.getData().getValue().get(pos);
+                Post ps = displayPostViewModel.getData(userId).getValue().get(pos);
                 MobileNavigationDirections.ActionGlobalShowPostFragment action =
-                        DisplayPostsFragmentDirections.actionGlobalShowPostFragment(
-                                ps.getId(),ps.getTitle(),ps.getUserName(),ps.getUserId(),ps.getPostImageUrl(),ps.getUserProfileUrl(),ps.getDescription(),ps.getAvgPrice());
+                        DisplayPostsFragmentDirections.actionGlobalShowPostFragment(ps);
                 Navigation.findNavController(view).navigate(action);
 
             }
@@ -84,6 +82,8 @@ public class DisplayPostsFragment extends Fragment {
     void reloadData(){
         binding.progressBar.setVisibility(View.VISIBLE);
         Model.instance().getAllPosts();
+        binding.progressBar.setVisibility(View.GONE);
+
     }
 
 
@@ -107,11 +107,8 @@ public class DisplayPostsFragment extends Fragment {
             userProfileUrl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view1) {
-                    Post post = new Post();
-                    post = displayPostViewModel.getData().getValue().get(getAdapterPosition());
-//                    Navigation.findNavController(view).navigate(DisplayPostsFragmentDirections.actionDisplayPostsFragmentToNavProfile(post));
-                    com.example.getmenu.MobileNavigationDirections.ActionGlobalNavProfile action = DisplayPostsFragmentDirections.actionGlobalNavProfile(post);
-
+                    String id = displayPostViewModel.getData(userId).getValue().get(getAdapterPosition()).getUserId();
+                    com.example.getmenu.MobileNavigationDirections.ActionGlobalUserProfileFragment action = DisplayPostsFragmentDirections.actionGlobalUserProfileFragment(id);
                     Navigation.findNavController(view1).navigate(action);
                 }
             });
@@ -157,17 +154,17 @@ public class DisplayPostsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
-            Post ps = displayPostViewModel.getData().getValue().get(position);
+            Post ps = displayPostViewModel.getData(userId).getValue().get(position);
             holder.bind(ps , position);
         }
 
         @Override
         public int getItemCount() {
-            if (displayPostViewModel.getData().getValue() == null) {
+            if (displayPostViewModel.getData(userId).getValue() == null) {
                 return 0;
             }
 
-            return displayPostViewModel.getData().getValue().size();
+            return displayPostViewModel.getData(userId).getValue().size();
         }
     }
 
