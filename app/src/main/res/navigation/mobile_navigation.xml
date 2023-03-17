@@ -26,8 +26,8 @@
     <fragment
         android:id="@+id/showPostFragment"
         android:name="com.example.getmenu.ShowPostFragment"
-        android:label="fragment_show_post"
-        tools:layout="@layout/fragment_show_post" >
+        android:label="Post"
+        tools:layout="@layout/fragment_show_post">
         <action
             android:id="@+id/action_showPostFragment_to_editPostFragment2"
             app:destination="@id/editPostFragment" />
@@ -38,8 +38,8 @@
     <fragment
         android:id="@+id/editPostFragment"
         android:name="com.example.getmenu.EditPostFragment"
-        android:label="fragment_edit_post"
-        tools:layout="@layout/fragment_edit_post" >
+        android:label="Edit Post"
+        tools:layout="@layout/fragment_edit_post">
         <argument
             android:name="post"
             app:argType="com.example.getmenu.Model.Post" />
@@ -60,8 +60,8 @@
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.example.getmenu.SignupFragment"
-        android:label="fragment_signup"
-        tools:layout="@layout/fragment_signup" >
+        android:label="Sign Up"
+        tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -69,8 +69,8 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.getmenu.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        android:label="Log In"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_nav_home"
             app:destination="@id/nav_home" />
@@ -103,8 +103,8 @@
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.example.getmenu.UserProfileFragment"
-        android:label="fragment_user_profile"
-        tools:layout="@layout/fragment_user_profile" >
+        android:label="My Account"
+        tools:layout="@layout/fragment_user_profile">
         <argument
             android:name="userId"
             app:argType="string" />

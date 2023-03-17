@@ -17,36 +17,39 @@ import android.widget.TextView;
 
 import com.example.getmenu.Model.Post;
 import com.example.getmenu.ShowPostFragmentDirections;
+import com.example.getmenu.databinding.FragmentShowPostBinding;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
 public class ShowPostFragment extends Fragment {
+    FragmentShowPostBinding binding;
+    View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_show_post, container, false);
 
-//        String postUserName = ShowPostFragmentArgs.fromBundle(getArguments()).getPostUserName();
-//        String postTitle = ShowPostFragmentArgs.fromBundle(getArguments()).getPostTitle();
-//        String postAvatarImage = ShowPostFragmentArgs.fromBundle(getArguments()).getPostUserProfileUrl();
-//        String postImage = ShowPostFragmentArgs.fromBundle(getArguments()).getPostImageUrl();
-//        String PostId = ShowPostFragmentArgs.fromBundle(getArguments()).getPostId();
+        binding = FragmentShowPostBinding.inflate(inflater,container,false);
+        view = binding.getRoot();
+
         Post post = ShowPostFragmentArgs.fromBundle(getArguments()).getPost();
 
-        Button editBtn = view.findViewById(R.id.showpost_edit_btn);
-        editBtn.setOnClickListener(view1 -> {
+        binding.showpostEditBtn.setOnClickListener(view1 -> {
             com.example.getmenu.ShowPostFragmentDirections.ActionShowPostFragmentToEditPostFragment2 action = ShowPostFragmentDirections.actionShowPostFragmentToEditPostFragment2(post);
             Navigation.findNavController(view1).navigate(action);
         });
 
 
-        TextView name = view.findViewById(R.id.ShowPost_author_name_tv);
+        TextView name = binding.ShowPostAuthorNameTv;
         name.setText(post.getUserName());
-        TextView title = view.findViewById(R.id.ShowPost_title_tv);
+        TextView title = binding.ShowPostTitleTv;
         title.setText(post.getTitle());
-        ImageView avatarImg = view.findViewById(R.id.ShowPost_author_avatar_img);
+        TextView description = binding.ShowPostDescriptionTv;
+        description.setText(post.getDescription());
+        TextView avgPrice = binding.ShowPostAvgpriceTv;
+        avgPrice.setText(post.getAvgPrice());
+        ImageView avatarImg = binding.ShowPostAuthorAvatarImg;
         Picasso.get().load(Uri.parse(post.getUserProfileUrl())).into(avatarImg);
-        ImageView image = view.findViewById(R.id.ShowPost_post_img);
+        ImageView image = binding.ShowPostPostImg;
         Picasso.get().load(Uri.parse(post.getPostImageUrl())).into(image);
 
         return view;
