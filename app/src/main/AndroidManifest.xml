@@ -12,13 +12,18 @@
         android:theme="@style/Theme.GetMenu">
         <activity
             android:name=".register_activity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.GetMenu.NoActionBar" />
         <activity
             android:name=".login_activity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.GetMenu.NoActionBar" />
+
         <activity
             android:name=".start_activity"
-            android:exported="true" >
+            android:exported="true"
+            android:theme="@style/Theme.GetMenu.NoActionBar" >
+
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -26,13 +31,6 @@
         </intent-filter>
         </activity>
 
-        <activity
-            android:name=".LoginSignupActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="false"

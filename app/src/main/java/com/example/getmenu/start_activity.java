@@ -1,15 +1,19 @@
 package com.example.getmenu;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.example.getmenu.Model.FireBaseModel;
-import com.example.getmenu.Model.Model;
+
+import com.example.getmenu.databinding.ActivityStartBinding;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 
 public class start_activity extends AppCompatActivity {
 
@@ -19,8 +23,9 @@ public class start_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        FireBaseModel.signOut();
+        ActivityStartBinding binding = ActivityStartBinding.inflate(getLayoutInflater());
 
-        setContentView(R.layout.activity_start);
+        setContentView(binding.getRoot());
 
         backgroundImageView = findViewById(R.id.main_background);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();

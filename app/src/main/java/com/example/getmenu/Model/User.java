@@ -1,5 +1,6 @@
 package com.example.getmenu.Model;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -10,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 @Entity
-public class User {
+public class User implements Serializable {
     final public static String COLLECTION_NAME = "users";
     public static String USERS_IMAGES_FIREBASE_PATH = "images/users";
 

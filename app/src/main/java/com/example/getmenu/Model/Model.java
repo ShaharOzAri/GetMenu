@@ -45,6 +45,15 @@ public class Model {
         void onComplete();
     }
 
+    public interface OnSignOutListener {
+        void onComplete();
+    }
+
+    public void signOut(OnSignOutListener onSignOutListener){
+        FireBaseModel.signOut(onSignOutListener);
+
+    }
+
     public interface GetUserListener {
         void onComplete(User user);
     }

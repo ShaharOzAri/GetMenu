@@ -58,29 +58,6 @@
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
     <fragment
-        android:id="@+id/signupFragment"
-        android:name="com.example.getmenu.SignupFragment"
-        android:label="Sign Up"
-        tools:layout="@layout/fragment_signup">
-        <action
-            android:id="@+id/action_signupFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.getmenu.LoginFragment"
-        android:label="Log In"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_loginFragment_to_nav_home"
-            app:destination="@id/nav_home" />
-    </fragment><action android:id="@+id/action_global_signupFragment" app:destination="@id/signupFragment"/>
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.getmenu.ui.gallery.GalleryFragment"
-        android:label="Gallery"
-        tools:layout="@layout/fragment_gallery"/>
-    <fragment
         android:id="@+id/nav_profile"
         android:name="com.example.getmenu.ProfileFragment"
         android:label="MyAccountFragment"

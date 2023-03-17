@@ -244,10 +244,11 @@ public class FireBaseModel {
                 .addOnFailureListener(e -> listener.onFail());
     }
 
-    public static void signOut() {
+    public static void signOut(Model.OnSignOutListener onSignOutListener) {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signOut();
         MyApplication.signOut();
+        onSignOutListener.onComplete();
     }
 
     public static void getUserById(String id,Model.GetUserListener listener){

@@ -33,6 +33,10 @@ public class ShowPostFragment extends Fragment {
 
         Post post = ShowPostFragmentArgs.fromBundle(getArguments()).getPost();
 
+        if(!post.getUserId().equals(MyApplication.user.getId())){
+            binding.showpostEditBtn.setVisibility(view.GONE);
+        }
+
         binding.showpostEditBtn.setOnClickListener(view1 -> {
             com.example.getmenu.ShowPostFragmentDirections.ActionShowPostFragmentToEditPostFragment2 action = ShowPostFragmentDirections.actionShowPostFragmentToEditPostFragment2(post);
             Navigation.findNavController(view1).navigate(action);
