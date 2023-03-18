@@ -15,7 +15,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.getmenu.Model.Model;
 import com.example.getmenu.Model.Post;
+import com.example.getmenu.Model.User;
 import com.example.getmenu.ShowPostFragmentDirections;
 import com.example.getmenu.databinding.FragmentShowPostBinding;
 import com.google.android.material.navigation.NavigationView;
@@ -24,6 +26,7 @@ import com.squareup.picasso.Picasso;
 public class ShowPostFragment extends Fragment {
     FragmentShowPostBinding binding;
     View view;
+    User postUser;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -32,6 +35,15 @@ public class ShowPostFragment extends Fragment {
         view = binding.getRoot();
 
         Post post = ShowPostFragmentArgs.fromBundle(getArguments()).getPost();
+        Model.instance().getUserById(post.getUserId(), new Model.GetUserListener() {
+            @Override
+            public void onComplete(User user) {
+                TextView name = binding.ShowPostAuthorNameTv;
+                name.setText(user.getName());
+                ImageView avatarImg = binding.ShowPostAuthorAvatarImg;
+                Picasso.get().load(Uri.parse(user.getProfileImageUrl())).into(avatarImg);
+            }
+        });
 
         if(!post.getUserId().equals(MyApplication.user.getId())){
             binding.showpostEditBtn.setVisibility(view.GONE);
@@ -43,16 +55,12 @@ public class ShowPostFragment extends Fragment {
         });
 
 
-        TextView name = binding.ShowPostAuthorNameTv;
-        name.setText(post.getUserName());
         TextView title = binding.ShowPostTitleTv;
         title.setText(post.getTitle());
         TextView description = binding.ShowPostDescriptionTv;
         description.setText(post.getDescription());
         TextView avgPrice = binding.ShowPostAvgpriceTv;
         avgPrice.setText(post.getAvgPrice());
-        ImageView avatarImg = binding.ShowPostAuthorAvatarImg;
-        Picasso.get().load(Uri.parse(post.getUserProfileUrl())).into(avatarImg);
         ImageView image = binding.ShowPostPostImg;
         Picasso.get().load(Uri.parse(post.getPostImageUrl())).into(image);
 

@@ -1,64 +1,110 @@
 package com.example.getmenu;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EditProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.getmenu.MobileNavigationDirections;
+import com.example.getmenu.Model.Model;
+import com.example.getmenu.Model.User;
+import com.example.getmenu.databinding.FragmentEditPostBinding;
+import com.example.getmenu.databinding.FragmentEditProfileBinding;
+import com.squareup.picasso.Picasso;
+
+import java.io.ByteArrayOutputStream;
+
+
 public class EditProfileFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public EditProfileFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EditProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EditProfileFragment newInstance(String param1, String param2) {
-        EditProfileFragment fragment = new EditProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    User createdUser;
+    FragmentEditProfileBinding binding;
+    View view;
+    ActivityResultLauncher<Void> cameraLauncher;
+    Uri imageUri;
+    ActivityResultLauncher<String> galleryAppLauncher;
+    TextView userName;
+    TextView userEmail;
+    ImageView userImage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+        cameraLauncher = registerForActivityResult(new ActivityResultContracts.TakePicturePreview(), new ActivityResultCallback<Bitmap>() {
+            @Override
+            public void onActivityResult(Bitmap result) {
+                if(result != null){
+                    binding.editprofileImg.setImageBitmap(result);
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    result.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                    String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), result, "Title", null);
+                    imageUri =  Uri.parse(path);
+                }
+            }
+        });
+
+        galleryAppLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri result) {
+                if (result != null){
+                    binding.editprofileImg.setImageURI(result);
+                    imageUri = result;
+                }
+            }
+        });
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        binding = FragmentEditProfileBinding.inflate(inflater,container,false);
+        view = binding.getRoot();
+
+        createdUser = EditProfileFragmentArgs.fromBundle(getArguments()).getUser();
+        userName = binding.editprofileNamePt;
+        userName.setText(createdUser.getName());
+        userEmail = binding.editprofileEmailPt;
+        userEmail.setText(createdUser.getEmail());
+        userImage = binding.editprofileImg;
+        Picasso.get().load(Uri.parse(createdUser.getProfileImageUrl())).into(userImage);
+
+        binding.editprofileCameraImgbtn.setOnClickListener(view1 -> {
+            cameraLauncher.launch(null);
+        });
+
+        binding.editprofileGalleryImgbtn.setOnClickListener(view1 -> {
+            galleryAppLauncher.launch("image/*");
+        });
+
+        binding.editprofileSaveBtn.setOnClickListener(view1 -> {
+            updateUserDetailsFromInput();
+
+            Model.instance().editUser(createdUser, imageUri, () -> {
+                com.example.getmenu.MobileNavigationDirections.ActionGlobalUserProfileFragment action = EditProfileFragmentDirections.actionGlobalUserProfileFragment(createdUser.getId());
+                Navigation.findNavController(view1).navigate(action);
+                Utils.print("success edit user profile: " + createdUser.getId());
+            });
+        });
+
+        return view;
+    }
+
+    public void updateUserDetailsFromInput() {
+        createdUser.setName(userName.getText().toString());
+        createdUser.setEmail(userEmail.getText().toString());
     }
 }

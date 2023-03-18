@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.getmenu.MobileNavigationDirections;
 import com.example.getmenu.Model.Model;
 import com.example.getmenu.Model.Post;
+import com.example.getmenu.Model.User;
 import com.example.getmenu.R;
 import com.example.getmenu.databinding.FragmentDisplayPostsBinding;
 
@@ -122,16 +123,21 @@ public class DisplayPostsFragment extends Fragment {
         }
 
         public void bind(Post post , int pos) {
+            Model.instance().getUserById(post.getUserId(), new Model.GetUserListener() {
+                @Override
+                public void onComplete(User user) {
+                    userName.setText(user.getName());
+                    if(post != null && !user.getProfileImageUrl().isEmpty()){
+                        Picasso.get().load(user.getProfileImageUrl()).noPlaceholder().into(userProfileUrl);
+                    }
+                }
+            });
             title.setText(post.getTitle());
             description.setText(post.getDescription());
             avgPrice.setText(post.getAvgPrice());
-            if(post != null && !post.getUserProfileUrl().isEmpty()){
-                Picasso.get().load(post.getUserProfileUrl()).noPlaceholder().into(this.userProfileUrl);
-            }
             if(post != null && !post.getPostImageUrl().isEmpty()){
                 Picasso.get().load(post.getPostImageUrl()).noPlaceholder().into(this.postImageUrl);
             }
-            userName.setText(post.getUserName());
         }
     }
 

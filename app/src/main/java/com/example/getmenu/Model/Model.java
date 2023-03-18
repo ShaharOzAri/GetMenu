@@ -62,6 +62,10 @@ public class Model {
         return allPosts;
     }
 
+    public void editUser(User user, Uri imageUri, AddUserListener addUserListener) {
+        boolean uploadImage = (imageUri == null) ? false : true;
+        executor.execute(() -> FireBaseModel.editUser(user, imageUri, uploadImage, addUserListener));
+    }
 
     public void clearPostRoom(){
         AppLocalDb.db.postDao().deleteAll();

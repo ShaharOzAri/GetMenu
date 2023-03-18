@@ -190,7 +190,7 @@ public class FireBaseModel {
                 });
     }
 
-    public void editUser(User user, Uri imageUri, boolean uploadImage, Model.AddUserListener addUserListener) {
+    public static void editUser(User user, Uri imageUri, boolean uploadImage, Model.AddUserListener addUserListener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         if (uploadImage) {

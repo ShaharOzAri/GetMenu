@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,9 +46,12 @@ public class ProfileFragment extends Fragment {
         if(user != null && !user.getProfileImageUrl().isEmpty()){
             Picasso.get().load(user.getProfileImageUrl()).noPlaceholder().into(profileImage);
         }
-//        binding.profileEditBtn.setOnClickListener(view1 -> {
-//            com.example.getmenu.MobileNavigationDirections.ActionGlobalEditProfileFragment action = ProfileFragmentDirections.actionGlobalEditProfileFragment(user);
-//        });
+        
+        Button editBtn = view.findViewById(R.id.profile_edit_btn);
+        editBtn.setOnClickListener(view1 -> {
+            com.example.getmenu.MobileNavigationDirections.ActionGlobalEditProfileFragment action = ProfileFragmentDirections.actionGlobalEditProfileFragment(user);
+            Navigation.findNavController(view1).navigate(action);
+        });
 
 
 
