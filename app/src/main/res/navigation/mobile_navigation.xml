@@ -60,6 +60,9 @@
         <argument
             android:name="user"
             app:argType="com.example.getmenu.Model.User" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment2"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_profile"
