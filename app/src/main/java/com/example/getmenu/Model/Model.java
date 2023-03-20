@@ -137,7 +137,11 @@ public class Model {
         });
     }
 
-
+    public void deletePost(Post post, FireBaseModel.Listener listener) {
+        executor.execute(() -> {
+            FireBaseModel.deletePost(post, null, listener);
+        });
+    }
 
 
     public void deleteSinglePost(String id){

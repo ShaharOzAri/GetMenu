@@ -92,6 +92,9 @@ public class EditPostFragment extends Fragment {
         postDescription.setText(createdPost.getDescription());
         postAvgPrice = binding.editpostAvgpricePt;
         postAvgPrice.setText(createdPost.getAvgPrice());
+        progressBar = binding.editPostProgressBar;
+        progressBar.setVisibility(View.INVISIBLE);
+
 
         binding.editpostCameraImgbtn.setOnClickListener(view1 -> {
             cameraLauncher.launch(null);
@@ -111,18 +114,18 @@ public class EditPostFragment extends Fragment {
                 editedPost.setPostImageUrl(createdPost.getPostImageUrl());
                 editedPost.setImageVersion(createdPost.getImageVersion());
 
-//                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
 
                 Model.instance().editPost(editedPost, imageUri, new FireBaseModel.Listener<Boolean>() {
                     @Override
                     public void onComplete() {
-//                        progressBar.setVisibility(View.INVISIBLE);
+                        progressBar.setVisibility(View.INVISIBLE);
                         Navigation.findNavController(view).navigate(R.id.action_editPostFragment_to_nav_home);
                     }
 
                     @Override
                     public void onFail() {
-//                        progressBar.setVisibility(View.INVISIBLE);
+                        progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(MyApplication.context, "failed to edit post", Toast.LENGTH_SHORT).show();
                         Utils.print("TAG: failed update post - " + editedPost.toString());
                     }
@@ -131,7 +134,7 @@ public class EditPostFragment extends Fragment {
         });
 
         binding.editpostDeleteBtn.setOnClickListener(view1 -> {
-            FireBaseModel.deletePost(createdPost, imageUri, new FireBaseModel.Listener() {
+            Model.instance().deletePost(createdPost, new FireBaseModel.Listener() {
                 @Override
                 public void onComplete() {
                     Navigation.findNavController(view).navigate(R.id.action_editPostFragment_to_nav_home);

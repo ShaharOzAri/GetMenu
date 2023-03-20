@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.getmenu.MobileNavigationDirections;
@@ -38,7 +39,7 @@ public class EditProfileFragment extends Fragment {
     TextView userName;
     TextView userEmail;
     ImageView userImage;
-
+    ProgressBar progressBar;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +82,8 @@ public class EditProfileFragment extends Fragment {
         userEmail.setText(createdUser.getEmail());
         userImage = binding.editprofileImg;
         Picasso.get().load(Uri.parse(createdUser.getProfileImageUrl())).into(userImage);
+        progressBar = binding.editProfileProgressBar;
+        progressBar.setVisibility(View.INVISIBLE);
 
         binding.editprofileCameraImgbtn.setOnClickListener(view1 -> {
             cameraLauncher.launch(null);
@@ -91,9 +94,11 @@ public class EditProfileFragment extends Fragment {
         });
 
         binding.editprofileSaveBtn.setOnClickListener(view1 -> {
+            progressBar.setVisibility(View.VISIBLE);
             updateUserDetailsFromInput();
 
             Model.instance().editUser(createdUser, imageUri, () -> {
+                progressBar.setVisibility(View.INVISIBLE);
                 com.example.getmenu.MobileNavigationDirections.ActionGlobalUserProfileFragment action = EditProfileFragmentDirections.actionGlobalUserProfileFragment(createdUser.getId());
                 Navigation.findNavController(view1).navigate(action);
                 Utils.print("success edit user profile: " + createdUser.getId());

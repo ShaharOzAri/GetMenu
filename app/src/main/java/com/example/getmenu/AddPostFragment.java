@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.getmenu.Model.Model;
@@ -39,7 +40,7 @@ public class AddPostFragment extends Fragment {
     FragmentAddPostBinding binding;
     ActivityResultLauncher<Void> cameraLauncher;
     Uri imageUri;
-
+    ProgressBar progressBar;
     ActivityResultLauncher<String> galleryAppLauncher;
 
 
@@ -76,6 +77,9 @@ public class AddPostFragment extends Fragment {
         binding = FragmentAddPostBinding.inflate(inflater,container,false);
         View view =binding.getRoot();
 
+        progressBar = binding.addPostProgressBar;
+        progressBar.setVisibility(View.INVISIBLE);
+
         binding.addPostSaveBtn.setOnClickListener(view1 -> {
             Post post= new Post();
 
@@ -89,13 +93,17 @@ public class AddPostFragment extends Fragment {
             post.setUserId(MyApplication.user.getId());
             post.setUserName(MyApplication.user.getName());
             post.setUserProfileUrl(MyApplication.user.getProfileImageUrl());
+            progressBar.setVisibility(View.VISIBLE);
 
             Model.instance().addPost(post, imageUri,()->{
                 Navigation.findNavController(view1).popBackStack();
             });
         });
 
-        binding.addPostCancelBtn.setOnClickListener(view1 -> Navigation.findNavController(view1).popBackStack());
+        binding.addPostCancelBtn.setOnClickListener(view1 ->{
+            progressBar.setVisibility(View.VISIBLE);
+            Navigation.findNavController(view1).popBackStack();
+        });
 
         binding.addPostCameraImgbtn.setOnClickListener(view1 -> {
             cameraLauncher.launch(null);
