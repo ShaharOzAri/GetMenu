@@ -94,8 +94,7 @@ public class EditProfileFragment extends Fragment {
             updateUserDetailsFromInput();
 
             Model.instance().editUser(createdUser, imageUri, () -> {
-                com.example.getmenu.MobileNavigationDirections.ActionGlobalUserProfileFragment action = EditProfileFragmentDirections.actionGlobalUserProfileFragment(createdUser.getId());
-                Navigation.findNavController(view1).navigate(action);
+                Navigation.findNavController(view).navigate(R.id.action_editProfileFragment_to_profileFragment2);
                 Utils.print("success edit user profile: " + createdUser.getId());
             });
         });
