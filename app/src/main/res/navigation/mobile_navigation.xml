@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.getmenu.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_nav_home_to_addPostFragment"
             app:destination="@id/addPostFragment" />
@@ -21,12 +21,12 @@
     <fragment
         android:id="@+id/addPostFragment"
         android:name="com.example.getmenu.AddPostFragment"
-        android:label="fragment_add_post"
+        android:label="Add Post"
         tools:layout="@layout/fragment_add_post" />
     <fragment
         android:id="@+id/showPostFragment"
         android:name="com.example.getmenu.ShowPostFragment"
-        android:label="Post"
+        android:label=" "
         tools:layout="@layout/fragment_show_post">
         <action
             android:id="@+id/action_showPostFragment_to_editPostFragment2"
@@ -50,13 +50,13 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.getmenu.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="My Account"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.getmenu.EditProfileFragment"
-        android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" >
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile">
         <argument
             android:name="user"
             app:argType="com.example.getmenu.Model.User" />
@@ -67,8 +67,8 @@
     <fragment
         android:id="@+id/nav_profile"
         android:name="com.example.getmenu.ProfileFragment"
-        android:label="MyAccountFragment"
-        tools:layout="@layout/fragment_profile"/>
+        android:label="My Account"
+        tools:layout="@layout/fragment_profile" />
     <action android:id="@+id/action_global_showPostFragment" app:destination="@id/showPostFragment" />
     <activity
         android:id="@+id/start_activity"
@@ -87,7 +87,7 @@
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.example.getmenu.UserProfileFragment"
-        android:label="My Account"
+        android:label=" "
         tools:layout="@layout/fragment_user_profile">
         <argument
             android:name="userId"
