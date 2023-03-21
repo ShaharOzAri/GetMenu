@@ -53,14 +53,14 @@ public class login_activity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        notRegisteredBtn = findViewById(R.id.already_registered);
-        loginBtn = findViewById(R.id.register_btn);
-        emailInput = findViewById(R.id.register_email);
-        passwordInput = findViewById(R.id.register_password);
-        emailError = findViewById(R.id.register_email_error);
-        passwordError = findViewById(R.id.register_password_error);
+        notRegisteredBtn = findViewById(R.id.not_registered);
+        loginBtn = findViewById(R.id.login_btn);
+        emailInput = findViewById(R.id.login_email);
+        passwordInput = findViewById(R.id.login_password);
+        emailError = findViewById(R.id.login_email_error);
+        passwordError = findViewById(R.id.login_password_error);
         progressBar = findViewById(R.id.progressBar);
-        loginTitle = findViewById(R.id.login_title);
+        loginTitle = findViewById(R.id.register_title);
         authenticationError = findViewById(R.id.authentication_error);
 
         backgroundImageView = findViewById(R.id.login_activity_background_image_view);

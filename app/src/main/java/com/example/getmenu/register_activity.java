@@ -84,15 +84,15 @@ public class register_activity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        alreadyRegisterBtn = findViewById(R.id.already_registered);
-        registerBtn = findViewById(R.id.register_btn);
-        emailInput = findViewById(R.id.register_email);
-        passwordInput = findViewById(R.id.register_password);
-        emailError = findViewById(R.id.register_email_error);
-        passwordError = findViewById(R.id.register_password_error);
+        alreadyRegisterBtn = findViewById(R.id.not_registered);
+        registerBtn = findViewById(R.id.login_btn);
+        emailInput = findViewById(R.id.login_email);
+        passwordInput = findViewById(R.id.login_password);
+        emailError = findViewById(R.id.login_email_error);
+        passwordError = findViewById(R.id.login_password_error);
         progressBar = findViewById(R.id.progressBar);
-        registerTitle = findViewById(R.id.login_title);
-        profileImage = findViewById(R.id.row_list_profile_image);
+        registerTitle = findViewById(R.id.register_title);
+        profileImage = findViewById(R.id.register_profile_image);
         nameInput = findViewById(R.id.register_name);
         userNameError = findViewById(R.id.register_name_error);
         imageError = findViewById(R.id.image_error);
