@@ -38,11 +38,14 @@ public class FireBaseModel {
 
     public FireBaseModel(){
         db = FirebaseFirestore.getInstance();
+        setFireBaseSetting();
+    }
+    public void setFireBaseSetting(){
         // Disable Firestore caching
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setPersistenceEnabled(false)
+                .setPersistenceEnabled(true)
                 .build();
-//        db.setFirestoreSettings(settings);
+        db.setFirestoreSettings(settings);
     }
 
     public interface Listener<T> {
@@ -51,6 +54,9 @@ public class FireBaseModel {
         void onFail();
     }
 
+//    This function gets last update parameter timestamp and listener
+//    it getting from firebase db the post's that updated or created after this timestamp
+//    when getting result it updating the post list and call the onComplete method of listener
     public static void getAllPosts(Long lastUpdateDate, Model.Listener<List<Post>> listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection(Post.POST_COLLECTION_NAME)
@@ -69,6 +75,8 @@ public class FireBaseModel {
                 });
     }
 
+//    This function get post details and imageUri and uploading the post
+//    when finish it's calling onComplete method of the listener
     public static void addPost(Post post , Uri imageUri, Model.AddPostListener listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection(Post.POST_COLLECTION_NAME)
@@ -112,6 +120,8 @@ public class FireBaseModel {
     }
 
 
+//    This method actually not "deleting" the post, it's change flag on the post to true (idDeleted)
+//    so it will know not to add it to the post list
     public static void deletePost(Post post, Uri imageUri, FireBaseModel.Listener listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -147,6 +157,8 @@ public class FireBaseModel {
         });
     }
 
+
+    //gets uri and returns its extension
     public static String getExtension(Uri uri) {
         try {
             ContentResolver contentResolver = MyApplication.context.getContentResolver();
@@ -205,6 +217,7 @@ public class FireBaseModel {
                 firebaseAuth.signOut();
             }
 
+            //firebase authentication sign in
             firebaseAuth.signInWithEmailAndPassword(email, password).
                     addOnSuccessListener(authResult -> {
                         Utils.print("Authentication successes");
@@ -234,7 +247,7 @@ public class FireBaseModel {
         onSignOutListener.onComplete();
     }
 
-    public static void getUserById(String id,Model.GetUserListener listener){
+    public static void getUserById(String id,Model.GetUserListener listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection(User.COLLECTION_NAME)
@@ -249,6 +262,4 @@ public class FireBaseModel {
                     listener.onComplete(user);
                 });
     }
-
-
 }

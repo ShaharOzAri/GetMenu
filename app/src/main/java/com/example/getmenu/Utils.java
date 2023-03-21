@@ -57,27 +57,4 @@ public class Utils {
         }
     }
 
-    public static String firstFiveLines(String str) {
-        int index = 0;
-        int lineCounter = 0;
-
-        for (Character c : str.toCharArray()) {
-            index++;
-
-            if (c == '\n') {
-                lineCounter++;
-            }
-            if (lineCounter == 5) {
-                break;
-            }
-        }
-
-        if (index != 0) {
-            String firstFiveLines = str.substring(0, index);
-            return firstFiveLines.trim();
-
-        } else {
-            return str;
-        }
-    }
 }

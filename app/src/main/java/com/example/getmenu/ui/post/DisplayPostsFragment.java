@@ -37,9 +37,7 @@ public class DisplayPostsFragment extends Fragment {
     PostRecyclerAdapter adapter;
     DisplayPostViewModel displayPostViewModel;
     View view;
-
     MutableLiveData<Float> exchangeRate;
-
     MutableLiveData<Character> currencySymbol;
 
     public DisplayPostsFragment(String userId){
@@ -55,18 +53,26 @@ public class DisplayPostsFragment extends Fragment {
         displayPostViewModel = new ViewModelProvider(this).get(DisplayPostViewModel.class);
         binding = FragmentDisplayPostsBinding.inflate(inflater,container,false);
         view = binding.getRoot();
+
         adapter = new PostRecyclerAdapter();
         binding.postrecyclerList.setHasFixedSize(true);
         binding.postrecyclerList.setAdapter(adapter);
 
+        //live data for for the exchange currency api
         exchangeRate = new MutableLiveData<>();
         exchangeRate.setValue(new Float(1));
 
+        //live data for for the exchange currency symbol
         currencySymbol = new MutableLiveData<>();
         currencySymbol.setValue('$');
+
+
+//        ** This click event will call api call and when it get's a response
+//        it will change the live data that holds the exchange rate and refresh the UI with the new currency
         binding.currencyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //if user press the button to change prices to ILS get the exchange rate using the API
                 if(binding.currencyBtn.getText().toString().contains("ILS")){
                     LiveData<Float> res = ExchangeRateModel.instance.getExchangeRate("USD","ILS");
                     binding.progressBar.setVisibility(View.VISIBLE);
@@ -146,6 +152,8 @@ public class DisplayPostsFragment extends Fragment {
             description = itemView.findViewById(R.id.postlistrow_description_tv);
             avgPrice = itemView.findViewById(R.id.postlisrow_avgPrice_tv);
 
+
+            //on click on user profile image go to profile fragment
             userProfileUrl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view1) {
@@ -154,6 +162,8 @@ public class DisplayPostsFragment extends Fragment {
                     Navigation.findNavController(view1).navigate(action);
                 }
             });
+
+            //on click on post row go to show post fragment
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -175,6 +185,8 @@ public class DisplayPostsFragment extends Fragment {
             });
             title.setText(post.getTitle());
             description.setText(post.getDescription());
+
+//            ** This part display the price by the chosen currency
             Float price = (Float.parseFloat(post.getAvgPrice())*exchangeRate.getValue());
             Character symbol = currencySymbol.getValue();
             avgPrice.setText(String.format("%.2f", price) + " " + symbol);
