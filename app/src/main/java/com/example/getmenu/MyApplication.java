@@ -2,23 +2,37 @@ package com.example.getmenu;
 
 import android.app.Application;
 import android.content.Context;
+import android.text.format.Time;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 
+import com.example.getmenu.Model.ExchangeRateModel;
 import com.example.getmenu.Model.FireBaseModel;
+import com.example.getmenu.Model.Post;
 import com.example.getmenu.Model.User;
+import com.example.getmenu.ui.post.DisplayPostsFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Observable;
+import java.util.Observer;
 
 public class MyApplication extends Application {
     public static User user = new User();
     public static FirebaseUser firebaseUserUid = null;
     public static Context context = null;
-    public static String postLocation = "";
-    public static String locationName = "";
+
+    public static Long exchangeRateLastUpdate;
+    public static Float exchangeRate;
 
     public static Context getMyContext(){
         return context;

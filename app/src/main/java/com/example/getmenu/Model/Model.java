@@ -122,6 +122,16 @@ public class Model {
         });
     }
 
+    public void changeCurrency(String currency){
+        if(currency.equals("ILS") || currency.equals("USD") ){
+            MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE)
+                    .edit().putString("currency" , currency).commit();
+        }
+    }
+
+
+
+
     @SuppressLint("StaticFieldLeak")
     public void editPost(Post post, Uri imageUri, FireBaseModel.Listener<Boolean> listener) {
         boolean imageUpdated;
