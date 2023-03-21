@@ -22,8 +22,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class register_activity extends AppCompatActivity {
 
-    FireBaseModel modelFireBase;
-
     // Buttons
     Button registerBtn;
     Button alreadyRegisterBtn;
@@ -78,8 +76,6 @@ public class register_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Firebase
-        modelFireBase = new FireBaseModel();
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();

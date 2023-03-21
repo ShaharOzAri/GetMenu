@@ -22,6 +22,8 @@ public class DisplayPostViewModel extends ViewModel {
         liveDataPost = Model.instance().getAllPosts();
     }
 
+//    if id is null display all the post
+//    if id is diffrent than null it's filtering the posts by user id
     public LiveData<List<Post>> getData(String id) {
         if (id == null) {
             return liveDataPost;
