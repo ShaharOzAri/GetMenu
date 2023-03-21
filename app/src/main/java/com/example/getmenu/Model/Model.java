@@ -27,7 +27,7 @@ public class Model {
         loading, loaded
     }
 
-    MutableLiveData<PostListLoadingState> postListLoadingState = new MutableLiveData<>();
+    public final MutableLiveData<PostListLoadingState> postListLoadingState = new MutableLiveData<PostListLoadingState>();
 
     public static Model instance(){
         return _instance;
@@ -106,7 +106,6 @@ public class Model {
                         localUpdateDate = post.getUpdateDate();
                     }
                 }
-
 
                 // update last local update date
                 MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE)

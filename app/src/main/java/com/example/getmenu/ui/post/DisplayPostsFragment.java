@@ -61,17 +61,20 @@ public class DisplayPostsFragment extends Fragment {
             }
         });
 
-        reloadData();
+        Model.instance().postListLoadingState.observe(getViewLifecycleOwner(),status->{
+            binding.swipeRefresh.setRefreshing(status == Model.PostListLoadingState.loading);
+        });
+
+        binding.swipeRefresh.setOnRefreshListener(()->{
+            reloadData();
+        });
         return view;
     }
 
 
     public void refresh() {
-        binding.progressBar.setVisibility(View.VISIBLE);
         adapter.notifyDataSetChanged();
-        binding.progressBar.setVisibility(View.GONE);
-
-//        swipeRefreshLayout.setRefreshing(false);
+        binding.swipeRefresh.setRefreshing(false);
     }
 
     @Override
@@ -81,10 +84,7 @@ public class DisplayPostsFragment extends Fragment {
     }
 
     void reloadData(){
-        binding.progressBar.setVisibility(View.VISIBLE);
         Model.instance().getAllPosts();
-        binding.progressBar.setVisibility(View.GONE);
-
     }
 
 
