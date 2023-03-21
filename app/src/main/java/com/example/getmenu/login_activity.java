@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class login_activity extends AppCompatActivity {
 
-    FireBaseModel modelFireBase;
 
     Button loginBtn;
     Button notRegisteredBtn;
@@ -46,9 +45,6 @@ public class login_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        // Firebase
-        modelFireBase = new FireBaseModel();
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();

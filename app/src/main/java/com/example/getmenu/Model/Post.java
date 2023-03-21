@@ -37,6 +37,8 @@ public class Post implements Serializable {
     Long timestamp = new Long(0);
     Long updateDate = new Long(0);
     public Post(){}
+
+    //function that return the post data as map(json)
     public Map<String, Object> toJson(String action) {
         Map<String, Object> json = new HashMap<String, Object>();
 
@@ -60,6 +62,8 @@ public class Post implements Serializable {
         return json;
     }
 
+
+    //function that create post from map (json)
     public static Post create(Map<String, Object> json) {
         Post post = new Post();
 

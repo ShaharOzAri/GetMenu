@@ -23,6 +23,8 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater,container,false);
         view = binding.getRoot();
 
+
+        //start the child fragment (display post fragment)
         Fragment displayPostsFragment = new DisplayPostsFragment(null);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.display_user_posts_container, displayPostsFragment).commit();

@@ -72,12 +72,15 @@ public class Model {
     public void clearPostRoom(){
         AppLocalDb.db.postDao().deleteAll();
     }
+
+//    this function checking execute the firebase method to get all posts that updated
+//    after "last update" param which stored in shared preferences
+//    it iterate all the post list on listener and if the post deleted (isDeleted = true)
+//    it remove it from room, and if not it inserting to DB (on conflict - on updating post it replaced)
     public void refreshPostsList() {
 
-        //************************************************************************
-        // Delete share preferences only dor debug!!!
-        MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE).edit().clear().commit();
-        //************************************************************************
+        // Delete share preferences only for debug
+//        MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE).edit().clear().commit();
 
         Utils.print("Refreshing post list");
         postListLoadingState.setValue(PostListLoadingState.loading);
@@ -120,16 +123,6 @@ public class Model {
             });
         });
     }
-
-    public void changeCurrency(String currency){
-        if(currency.equals("ILS") || currency.equals("USD") ){
-            MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE)
-                    .edit().putString("currency" , currency).commit();
-        }
-    }
-
-
-
 
     @SuppressLint("StaticFieldLeak")
     public void editPost(Post post, Uri imageUri, FireBaseModel.Listener<Boolean> listener) {

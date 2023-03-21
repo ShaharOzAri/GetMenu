@@ -49,10 +49,10 @@ public class ProfileFragment extends Fragment {
             Navigation.findNavController(view1).navigate(action);
         });
 
+        //show my posts
         Fragment displayPostsFragment = new DisplayPostsFragment(MyApplication.user.getId());
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.display_user_posts_container, displayPostsFragment).commit();
-
 
         return view;
     }

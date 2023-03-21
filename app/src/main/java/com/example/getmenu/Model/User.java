@@ -30,6 +30,7 @@ public class User implements Serializable {
     @NotNull
     String profileImageUrl = "";
 
+    //function that create map(json) from user
     public Map<String, Object> toJson() {
         Map<String, Object> json = new HashMap<String, Object>();
         json.put("id", id);
@@ -41,6 +42,7 @@ public class User implements Serializable {
         return json;
     }
 
+    //function that create user from map(json)
     public static User create(Map<String, Object> json) {
         User user = new User();
 
