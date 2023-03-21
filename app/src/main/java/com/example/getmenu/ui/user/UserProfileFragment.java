@@ -27,6 +27,7 @@ public class UserProfileFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_user_profile, container, false);
         binding = FragmentUserProfileBinding.inflate(inflater,container,false);
 
+        //get user id from safe args
         String userId = UserProfileFragmentArgs.fromBundle(getArguments()).getUserId();
 
         Model.instance().getUserById(userId, new Model.GetUserListener() {
@@ -47,11 +48,10 @@ public class UserProfileFragment extends Fragment {
             }
         });
 
-
+        //show only the specific user posts
         Fragment displayPostsFragment = new DisplayPostsFragment(userId);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.display_user_posts_container, displayPostsFragment).commit();
-
 
         return view;
     }

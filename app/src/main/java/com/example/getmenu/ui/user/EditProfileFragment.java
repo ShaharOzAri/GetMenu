@@ -54,6 +54,7 @@ public class EditProfileFragment extends Fragment {
             public void onActivityResult(Bitmap result) {
                 if(result != null){
                     binding.editprofileImg.setImageBitmap(result);
+                    // convert bitmap to uri
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                     result.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
                     String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), result, "Title", null);
@@ -80,7 +81,9 @@ public class EditProfileFragment extends Fragment {
         binding = FragmentEditProfileBinding.inflate(inflater,container,false);
         view = binding.getRoot();
 
+        //get user from safe args
         createdUser = EditProfileFragmentArgs.fromBundle(getArguments()).getUser();
+
         userName = binding.editprofileNamePt;
         userName.setText(createdUser.getName());
         userEmail = binding.editprofileEmailPt;
@@ -94,12 +97,12 @@ public class EditProfileFragment extends Fragment {
             cameraLauncher.launch(null);
         });
 
-
         binding.editprofileGalleryImgbtn.setOnClickListener(view1 -> {
             galleryAppLauncher.launch("image/*");
         });
 
         binding.editprofileSaveBtn.setOnClickListener(view1 -> {
+            // check if all the fields full
             if(userName.getText().toString().length() > 0 && userEmail.getText().toString().length() > 0){
                 progressBar.setVisibility(View.VISIBLE);
 
