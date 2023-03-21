@@ -31,9 +31,6 @@ public class MyApplication extends Application {
     public static FirebaseUser firebaseUserUid = null;
     public static Context context = null;
 
-    public static Long exchangeRateLastUpdate;
-    public static Float exchangeRate;
-
     public static Context getMyContext(){
         return context;
     }

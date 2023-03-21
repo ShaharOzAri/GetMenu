@@ -22,7 +22,7 @@ public class start_activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        FireBaseModel.signOut();
+
         ActivityStartBinding binding = ActivityStartBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
@@ -34,7 +34,7 @@ public class start_activity extends AppCompatActivity {
             public void run() {
                 try {
                     //Display for 3 seconds
-                    sleep(3000);
+                    sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {

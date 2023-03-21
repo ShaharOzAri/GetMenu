@@ -51,6 +51,8 @@ public class FireBaseModel {
         void onFail();
     }
 
+
+    //get all posts from the last update date
     public static void getAllPosts(Long lastUpdateDate, Model.Listener<List<Post>> listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection(Post.POST_COLLECTION_NAME)
