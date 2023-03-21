@@ -29,7 +29,6 @@ public class start_activity extends AppCompatActivity {
 
         backgroundImageView = findViewById(R.id.main_background);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         new Thread() {
             public void run() {

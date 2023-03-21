@@ -8,6 +8,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.getmenu.Model.ExchangeRateModel;
 import com.example.getmenu.Model.Model;
 import com.example.getmenu.Model.User;
 import com.example.getmenu.R;
@@ -40,6 +42,9 @@ public class EditProfileFragment extends Fragment {
     TextView userEmail;
     ImageView userImage;
     ProgressBar progressBar;
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +94,7 @@ public class EditProfileFragment extends Fragment {
             cameraLauncher.launch(null);
         });
 
+
         binding.editprofileGalleryImgbtn.setOnClickListener(view1 -> {
             galleryAppLauncher.launch("image/*");
         });
@@ -96,6 +102,7 @@ public class EditProfileFragment extends Fragment {
         binding.editprofileSaveBtn.setOnClickListener(view1 -> {
             if(userName.getText().toString().length() > 0 && userEmail.getText().toString().length() > 0){
                 progressBar.setVisibility(View.VISIBLE);
+
                 updateUserDetailsFromInput();
                 binding.editprofileErrorMag.setText("");
 

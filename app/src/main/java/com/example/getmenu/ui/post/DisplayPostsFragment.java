@@ -1,5 +1,6 @@
 package com.example.getmenu.ui.post;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,19 +9,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.getmenu.MobileNavigationDirections;
+import com.example.getmenu.Model.ExchangeRate;
+import com.example.getmenu.Model.ExchangeRateModel;
 import com.example.getmenu.Model.Model;
 import com.example.getmenu.Model.Post;
 import com.example.getmenu.Model.User;
+import com.example.getmenu.MyApplication;
 import com.example.getmenu.R;
+import com.example.getmenu.Utils;
 import com.example.getmenu.databinding.FragmentDisplayPostsBinding;
 
 import com.squareup.picasso.Picasso;
+
+import java.util.Date;
 
 public class DisplayPostsFragment extends Fragment {
     String userId = null;
@@ -28,6 +37,10 @@ public class DisplayPostsFragment extends Fragment {
     PostRecyclerAdapter adapter;
     DisplayPostViewModel displayPostViewModel;
     View view;
+
+    MutableLiveData<Float> exchangeRate;
+
+    MutableLiveData<Character> currencySymbol;
 
     public DisplayPostsFragment(String userId){
         this.userId = userId;
@@ -45,6 +58,34 @@ public class DisplayPostsFragment extends Fragment {
         adapter = new PostRecyclerAdapter();
         binding.postrecyclerList.setHasFixedSize(true);
         binding.postrecyclerList.setAdapter(adapter);
+
+        exchangeRate = new MutableLiveData<>();
+        exchangeRate.setValue(new Float(1));
+
+        currencySymbol = new MutableLiveData<>();
+        currencySymbol.setValue('$');
+        binding.currencyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(binding.currencyBtn.getText().toString().contains("ILS")){
+                    LiveData<Float> res = ExchangeRateModel.instance.getExchangeRate("USD","ILS");
+                    binding.progressBar.setVisibility(View.VISIBLE);
+                    res.observe(getViewLifecycleOwner(),(Float)->{
+                        exchangeRate.setValue(Float);
+                        currencySymbol.setValue('₪');
+                        refresh();
+                    });
+                    binding.currencyBtn.setText("Switch prices to USD");
+                }else{
+                    binding.progressBar.setVisibility(View.VISIBLE);
+                    exchangeRate.setValue(new Float(1));
+                    currencySymbol.setValue('$');
+                    refresh();
+                    binding.currencyBtn.setText("Switch prices to ILS");
+                    binding.progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
 
         binding.postrecyclerList.setLayoutManager(new LinearLayoutManager(view.getContext()));
         displayPostViewModel.getData(userId).observe(getViewLifecycleOwner(), list -> {
@@ -71,10 +112,10 @@ public class DisplayPostsFragment extends Fragment {
         return view;
     }
 
-
     public void refresh() {
         adapter.notifyDataSetChanged();
         binding.swipeRefresh.setRefreshing(false);
+        binding.progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -134,7 +175,9 @@ public class DisplayPostsFragment extends Fragment {
             });
             title.setText(post.getTitle());
             description.setText(post.getDescription());
-            avgPrice.setText(post.getAvgPrice());
+            Float price = (Float.parseFloat(post.getAvgPrice())*exchangeRate.getValue());
+            Character symbol = currencySymbol.getValue();
+            avgPrice.setText(String.format("%.2f", price) + " " + symbol);
             if(post != null && !post.getPostImageUrl().isEmpty()){
                 Picasso.get().load(post.getPostImageUrl()).noPlaceholder().into(this.postImageUrl);
             }

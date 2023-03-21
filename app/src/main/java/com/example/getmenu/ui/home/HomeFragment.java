@@ -29,7 +29,6 @@ public class HomeFragment extends Fragment {
 
         FloatingActionButton plusFab = binding.mainAddPostBtn;
 
-
         plusFab.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigate(R.id.action_nav_home_to_addPostFragment);
         });
