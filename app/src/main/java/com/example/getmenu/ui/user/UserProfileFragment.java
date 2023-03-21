@@ -1,4 +1,4 @@
-package com.example.getmenu;
+package com.example.getmenu.ui.user;
 
 import android.os.Bundle;
 
@@ -8,29 +8,24 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.getmenu.Model.Model;
-import com.example.getmenu.Model.Post;
 import com.example.getmenu.Model.User;
-import com.example.getmenu.databinding.FragmentHomeBinding;
-import com.example.getmenu.databinding.FragmentProfileBinding;
+import com.example.getmenu.R;
 import com.example.getmenu.databinding.FragmentUserProfileBinding;
 import com.example.getmenu.ui.post.DisplayPostsFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 public class UserProfileFragment extends Fragment {
     FragmentUserProfileBinding binding;
-    User user = new User();
     View view;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_user_profile, container, false);
         binding = FragmentUserProfileBinding.inflate(inflater,container,false);
-//        view = binding.getRoot();
 
         String userId = UserProfileFragmentArgs.fromBundle(getArguments()).getUserId();
 

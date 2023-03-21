@@ -20,12 +20,12 @@
 
     <fragment
         android:id="@+id/addPostFragment"
-        android:name="com.example.getmenu.AddPostFragment"
+        android:name="com.example.getmenu.ui.post.AddPostFragment"
         android:label="Add Post"
         tools:layout="@layout/fragment_add_post" />
     <fragment
         android:id="@+id/showPostFragment"
-        android:name="com.example.getmenu.ShowPostFragment"
+        android:name="com.example.getmenu.ui.post.ShowPostFragment"
         android:label=" "
         tools:layout="@layout/fragment_show_post">
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/editPostFragment"
-        android:name="com.example.getmenu.EditPostFragment"
+        android:name="com.example.getmenu.ui.post.EditPostFragment"
         android:label="Edit Post"
         tools:layout="@layout/fragment_edit_post">
         <argument
@@ -49,12 +49,12 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.getmenu.ProfileFragment"
+        android:name="com.example.getmenu.ui.user.ProfileFragment"
         android:label="My Account"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.example.getmenu.EditProfileFragment"
+        android:name="com.example.getmenu.ui.user.EditProfileFragment"
         android:label="Edit Profile"
         tools:layout="@layout/fragment_edit_profile">
         <argument
@@ -66,7 +66,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.example.getmenu.ProfileFragment"
+        android:name="com.example.getmenu.ui.user.ProfileFragment"
         android:label="My Account"
         tools:layout="@layout/fragment_profile" />
     <action android:id="@+id/action_global_showPostFragment" app:destination="@id/showPostFragment" />
@@ -86,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
-        android:name="com.example.getmenu.UserProfileFragment"
+        android:name="com.example.getmenu.ui.user.UserProfileFragment"
         android:label=" "
         tools:layout="@layout/fragment_user_profile">
         <argument

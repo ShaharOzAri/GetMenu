@@ -29,36 +29,19 @@ public class Post implements Serializable {
     String id = "";
     String title = "";
     String userId = "";
-    String userName = "";
     String postImageUrl = "";
-    String userProfileUrl = "";
     String description = "";
     String avgPrice = "";
-
-
     int imageVersion = 0;
-
     boolean isDeleted = false;
-
     Long timestamp = new Long(0);
     Long updateDate = new Long(0);
-
-    public Post(String i , String title) {
-        id = i;
-        this.title = title;
-        userName = "shahar";
-        postImageUrl = "https://cdn.onecklace.com/products/2653/product_2653_1_730.jpeg";
-        userProfileUrl = "https://cdn.onecklace.com/products/2653/product_2653_model_1_730.jpeg";
-    }
-
     public Post(){}
     public Map<String, Object> toJson(String action) {
         Map<String, Object> json = new HashMap<String, Object>();
 
         json.put("id", id);
         json.put("userId", userId);
-        json.put("userName", userName);
-        json.put("userProfileUrl", userProfileUrl);
         json.put("postImageUrl", postImageUrl);
         json.put("title", title);
         json.put("description", description);
@@ -66,14 +49,14 @@ public class Post implements Serializable {
         json.put("isDeleted", isDeleted);
         json.put("imageVersion", imageVersion);
         json.put("updateDate", FieldValue.serverTimestamp());
-//
-//        if ("create".equals(action)) {
-//            json.put("timestamp", FieldValue.serverTimestamp());
-//        } else {
-//            Timestamp ts = getServerTimestamp(timestamp);
-//            json.put("timestamp", ts);
-//        }
-//
+
+        if ("create".equals(action)) {
+            json.put("timestamp", FieldValue.serverTimestamp());
+        } else {
+            Timestamp ts = getServerTimestamp(timestamp);
+            json.put("timestamp", ts);
+        }
+
         return json;
     }
 
@@ -82,10 +65,6 @@ public class Post implements Serializable {
 
         if (json.containsKey("id")) {
             post.setId((String) json.get("id"));
-        }
-
-        if (json.containsKey("userName")) {
-            post.setUserName((String) json.get("userName"));
         }
 
         if (json.containsKey("userId")) {
@@ -98,11 +77,6 @@ public class Post implements Serializable {
 
         if (json.containsKey("postImageUrl")) {
             post.setPostImageUrl((String) json.get("postImageUrl"));
-        }
-
-
-        if (json.containsKey("userProfileUrl")) {
-            post.setUserProfileUrl((String) json.get("userProfileUrl"));
         }
 
         if (json.containsKey("description")) {
@@ -122,22 +96,22 @@ public class Post implements Serializable {
         }
 
 
-//        if (json.containsKey("timestamp")) {
-//            try {
-//                Timestamp ts = (Timestamp) json.get("timestamp");
-//                Long timestamp = ts.getSeconds();
-//                post.setTimestamp(timestamp);
-//            } catch (Exception e) {
-//                post.setTimestamp(Long.parseLong(json.get("timestamp").toString()));
-//                e.printStackTrace();
-//            }
-//        }
+        if (json.containsKey("timestamp")) {
+            try {
+                Timestamp ts = (Timestamp) json.get("timestamp");
+                Long timestamp = ts.getSeconds();
+                post.setTimestamp(timestamp);
+            } catch (Exception e) {
+                post.setTimestamp(Long.parseLong(json.get("timestamp").toString()));
+                e.printStackTrace();
+            }
+        }
 
-//        if (json.containsKey("updateDate")) {
-//            Timestamp ts = (Timestamp) json.get("updateDate");
-//            Long updateDate = ts.getSeconds();
-//            post.setUpdateDate(updateDate);
-//        }
+        if (json.containsKey("updateDate")) {
+            Timestamp ts = (Timestamp) json.get("updateDate");
+            Long updateDate = ts.getSeconds();
+            post.setUpdateDate(updateDate);
+        }
 
         return post;
     }
@@ -146,14 +120,6 @@ public class Post implements Serializable {
     @NotNull
     public String getId() {
         return id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getUserProfileUrl() {
-        return userProfileUrl;
     }
 
     public String getPostImageUrl() {
@@ -192,14 +158,6 @@ public class Post implements Serializable {
     // Setters ------------------------------------------------------------------------
     public void setId(@NotNull String id) {
         this.id = id;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setUserProfileUrl(String userProfileUrl) {
-        this.userProfileUrl = userProfileUrl;
     }
 
     public void setPostImageUrl(String postImageUrl) {
@@ -243,11 +201,11 @@ public class Post implements Serializable {
         this.imageVersion = imageVersion;
     }
 
-//    private Timestamp getServerTimestamp(long timestamp) {
-//        TimeZone tz = TimeZone.getDefault();
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
-//
-//        return new Timestamp(new Date(timestamp * 1000));
-//    }
+    private Timestamp getServerTimestamp(long timestamp) {
+        TimeZone tz = TimeZone.getDefault();
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
+
+        return new Timestamp(new Date(timestamp * 1000));
+    }
 }

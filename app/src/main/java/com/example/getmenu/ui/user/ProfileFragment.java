@@ -1,4 +1,4 @@
-package com.example.getmenu;
+package com.example.getmenu.ui.user;
 
 import android.os.Bundle;
 
@@ -13,14 +13,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.getmenu.MobileNavigationDirections;
-import com.example.getmenu.Model.Model;
-import com.example.getmenu.Model.Post;
 import com.example.getmenu.Model.User;
-import com.example.getmenu.databinding.FragmentHomeBinding;
+import com.example.getmenu.MyApplication;
+import com.example.getmenu.R;
 import com.example.getmenu.databinding.FragmentProfileBinding;
 import com.example.getmenu.ui.post.DisplayPostsFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends Fragment {
@@ -31,9 +28,8 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_profile, container, false);
         binding = FragmentProfileBinding.inflate(inflater,container,false);
-//        view = binding.getRoot();
 
-         user = MyApplication.getUser();
+        user = MyApplication.getUser();
 
         TextView nameTv = view.findViewById(R.id.profile_name_tv);
         nameTv.setText(user.getName());
@@ -52,8 +48,6 @@ public class ProfileFragment extends Fragment {
             com.example.getmenu.MobileNavigationDirections.ActionGlobalEditProfileFragment action = ProfileFragmentDirections.actionGlobalEditProfileFragment(user);
             Navigation.findNavController(view1).navigate(action);
         });
-
-
 
         Fragment displayPostsFragment = new DisplayPostsFragment(MyApplication.user.getId());
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();

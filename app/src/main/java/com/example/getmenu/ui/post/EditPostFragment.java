@@ -1,4 +1,4 @@
-package com.example.getmenu;
+package com.example.getmenu.ui.post;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -23,9 +23,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.getmenu.ui.post.EditPostFragmentArgs;
 import com.example.getmenu.Model.FireBaseModel;
 import com.example.getmenu.Model.Model;
 import com.example.getmenu.Model.Post;
+import com.example.getmenu.MyApplication;
+import com.example.getmenu.R;
+import com.example.getmenu.Utils;
 import com.example.getmenu.databinding.FragmentEditPostBinding;
 import com.squareup.picasso.Picasso;
 
@@ -93,6 +97,7 @@ public class EditPostFragment extends Fragment {
         postAvgPrice = binding.editpostAvgpricePt;
         postAvgPrice.setText(createdPost.getAvgPrice());
         progressBar = binding.editPostProgressBar;
+        titleError = binding.editpostErrorMsg;
         progressBar.setVisibility(View.INVISIBLE);
 
 
@@ -153,17 +158,16 @@ public class EditPostFragment extends Fragment {
 
     public boolean validateUserInput() {
 
-        if (postTitle.getText() == null || postTitle.getText().equals("")) {
-            titleError.setVisibility(View.VISIBLE);
-            return false;
+        if (postTitle.getText().toString().length() > 0 &&
+                postDescription.getText().toString().length() > 0 &&
+                postAvgPrice.getText().toString().length() > 0
+        ) {
+                titleError.setText("");
+                return true;
         }
 
-        if (postDescription.getText() == null || postDescription.getText().equals("")) {
-            contentError.setVisibility(View.VISIBLE);
-            return false;
-        }
-
-        return true;
+        titleError.setText("Please fill all filed");
+        return false;
     }
 
     public Post createPostFromInput() {
@@ -173,8 +177,6 @@ public class EditPostFragment extends Fragment {
         post.setDescription(postDescription.getText().toString());
         post.setAvgPrice(postAvgPrice.getText().toString());
         post.setUserId(MyApplication.user.getId());
-        post.setUserProfileUrl(MyApplication.user.getProfileImageUrl());
-        post.setUserName(MyApplication.user.getName());
 
         return post;
     }

@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditProfileFragment" >
+    tools:context=".ui.user.EditProfileFragment" >
 
     <ScrollView
         android:id="@+id/ScrollViewEditProfile"
@@ -40,8 +40,9 @@
                 android:text="SAVE CHANGES"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.44"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editprofile_email_pt" />
+                app:layout_constraintTop_toBottomOf="@+id/editprofileErrorMag" />
 
             <ImageView
                 android:id="@+id/editprofile_img"
@@ -117,6 +118,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/editprofileErrorMag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textColor="#B31414"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editprofile_email_pt" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

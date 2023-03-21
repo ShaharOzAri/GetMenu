@@ -21,8 +21,6 @@ public class Model {
     private static final Model _instance = new Model();
     private FireBaseModel fireBaseModel = new FireBaseModel();
     private final Executor executor = Executors.newSingleThreadExecutor();
-    private final Handler mainHandler = HandlerCompat.createAsync(Looper.getMainLooper());
-    AppLocalDbRepository localDb = AppLocalDb.db;
     MutableLiveData<List<Post>> allPosts = new MutableLiveData<List<Post>>();
 
     public enum PostListLoadingState {
@@ -41,6 +39,10 @@ public class Model {
         void onComplete(T data);
     }
 
+    public interface AddPostListener{
+        void onComplete();
+    }
+
     public interface AddUserListener {
         void onComplete();
     }
@@ -49,14 +51,14 @@ public class Model {
         void onComplete();
     }
 
-    public void signOut(OnSignOutListener onSignOutListener){
-        FireBaseModel.signOut(onSignOutListener);
-
-    }
-
     public interface GetUserListener {
         void onComplete(User user);
     }
+
+    public void signOut(OnSignOutListener onSignOutListener){
+        FireBaseModel.signOut(onSignOutListener);
+    }
+
     public LiveData<List<Post>> getAllPosts() {
         refreshPostsList();
         return allPosts;
@@ -144,17 +146,6 @@ public class Model {
     }
 
 
-    public void deleteSinglePost(String id){
-        AppLocalDb.db.postDao().deleteById(id);
-    }
-    public interface AddPostListener{
-        void onComplete();
-    }
-
-//    public Post getPost(int i){
-//        return data.get(i);
-//    }
-
     public void addPost(Post post , Uri imageUri, AddPostListener listener){
         executor.execute(() -> {
             FireBaseModel.addPost(post, imageUri, listener);
@@ -168,12 +159,5 @@ public class Model {
     public void getUserById(String id , GetUserListener getUserListener){
         executor.execute(() -> fireBaseModel.getUserById(id,getUserListener));
     }
-
-//    public void removeStudent(Post post){
-//        data.remove(post);
-//    }
-
-
-
 
 }

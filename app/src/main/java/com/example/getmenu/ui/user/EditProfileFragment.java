@@ -1,4 +1,4 @@
-package com.example.getmenu;
+package com.example.getmenu.ui.user;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -18,10 +18,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.getmenu.MobileNavigationDirections;
 import com.example.getmenu.Model.Model;
 import com.example.getmenu.Model.User;
-import com.example.getmenu.databinding.FragmentEditPostBinding;
+import com.example.getmenu.R;
+import com.example.getmenu.Utils;
 import com.example.getmenu.databinding.FragmentEditProfileBinding;
 import com.squareup.picasso.Picasso;
 
@@ -94,14 +94,21 @@ public class EditProfileFragment extends Fragment {
         });
 
         binding.editprofileSaveBtn.setOnClickListener(view1 -> {
-            progressBar.setVisibility(View.VISIBLE);
-            updateUserDetailsFromInput();
+            if(userName.getText().toString().length() > 0 && userEmail.getText().toString().length() > 0){
+                progressBar.setVisibility(View.VISIBLE);
+                updateUserDetailsFromInput();
+                binding.editprofileErrorMag.setText("");
 
-            Model.instance().editUser(createdUser, imageUri, () -> {
-                progressBar.setVisibility(View.INVISIBLE);
-                Navigation.findNavController(view).navigate(R.id.action_editProfileFragment_to_profileFragment2);
-                Utils.print("success edit user profile: " + createdUser.getId());
-            });
+                Model.instance().editUser(createdUser, imageUri, () -> {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    Navigation.findNavController(view).navigate(R.id.action_editProfileFragment_to_profileFragment2);
+                    Utils.print("success edit user profile: " + createdUser.getId());
+                });
+
+            }else{
+                binding.editprofileErrorMag.setText("Please fill all fields");
+            }
+
         });
 
         return view;

@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditPostFragment">
+    tools:context=".ui.post.EditPostFragment">
 
     <ScrollView
         android:id="@+id/ScrollViewEditPost"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="-141dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -43,30 +44,30 @@
                 android:layout_width="156dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="25dp"
                 android:layout_marginEnd="5dp"
                 android:backgroundTint="#DDD1BF"
                 android:text="SAVE"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/editpost_delete_btn"
-                app:layout_constraintTop_toBottomOf="@+id/editpost_avgprice_pt" />
+                app:layout_constraintStart_toEndOf="@+id/editpost_delete_btn" />
 
             <Button
                 android:id="@+id/editpost_delete_btn"
                 android:layout_width="162dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="5dp"
                 android:backgroundTint="#DDD1BF"
                 android:text="DELETE"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/editpost_save_btn"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editpost_avgprice_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/editpostErrorMsg" />
 
             <ImageView
                 android:id="@+id/editpost_img"
@@ -167,11 +168,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/editpost_avgprice_tv"
                 app:layout_constraintTop_toBottomOf="@+id/editpost_description_pt" />
+
+            <TextView
+                android:id="@+id/editpostErrorMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#D31D1D"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/editpost_save_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editpost_avgprice_pt" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

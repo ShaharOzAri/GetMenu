@@ -111,23 +111,6 @@ public class FireBaseModel {
         }
     }
 
-    public static void getAllPostsByUserId(String userId, Model.Listener<List<Post>> listener) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection(Post.POST_COLLECTION_NAME)
-                .whereEqualTo("userId", userId).get()
-                .addOnCompleteListener(task -> {
-                    List<Post> list = new LinkedList<Post>();
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot doc : task.getResult()) {
-                            Post post = Post.create(doc.getData());
-                            if (post != null) {
-                                list.add(post);
-                            }
-                        }
-                    }
-                    listener.onComplete(list);
-                });
-    }
 
     public static void deletePost(Post post, Uri imageUri, FireBaseModel.Listener listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -214,7 +197,7 @@ public class FireBaseModel {
     }
 
     public static void loginUser(final String email, String password, final FireBaseModel.Listener listener) {
-        Log.d("TAG", email + password);
+//        Log.d("TAG", email + password);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
         if (email != null && !email.equals("") && password != null && !password.equals("")) {
@@ -265,20 +248,6 @@ public class FireBaseModel {
                     }
                     listener.onComplete(user);
                 });
-
-
-
-
-//         db.collection(User.COLLECTION_NAME).document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                User user = new User();
-//                if (task.isSuccessful()) {
-//                    user = User.create(task.getResult().getData());
-//                }
-//                listener.onComplete(user);
-//            }
-//        });
     }
 
 

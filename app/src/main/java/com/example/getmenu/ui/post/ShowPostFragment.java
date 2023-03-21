@@ -1,26 +1,22 @@
-package com.example.getmenu;
+package com.example.getmenu.ui.post;
 
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NamedNavArgument;
-import androidx.navigation.NavArgument;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.getmenu.Model.Model;
 import com.example.getmenu.Model.Post;
 import com.example.getmenu.Model.User;
-import com.example.getmenu.ShowPostFragmentDirections;
+import com.example.getmenu.MyApplication;
 import com.example.getmenu.databinding.FragmentShowPostBinding;
-import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
 public class ShowPostFragment extends Fragment {
@@ -50,7 +46,7 @@ public class ShowPostFragment extends Fragment {
         }
 
         binding.showpostEditBtn.setOnClickListener(view1 -> {
-            com.example.getmenu.ShowPostFragmentDirections.ActionShowPostFragmentToEditPostFragment2 action = ShowPostFragmentDirections.actionShowPostFragmentToEditPostFragment2(post);
+            ShowPostFragmentDirections.ActionShowPostFragmentToEditPostFragment2 action = ShowPostFragmentDirections.actionShowPostFragmentToEditPostFragment2(post);
             Navigation.findNavController(view1).navigate(action);
         });
 

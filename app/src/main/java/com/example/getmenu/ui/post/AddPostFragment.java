@@ -1,4 +1,4 @@
-package com.example.getmenu;
+package com.example.getmenu.ui.post;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 import com.example.getmenu.Model.Model;
 import com.example.getmenu.Model.Post;
+import com.example.getmenu.MyApplication;
 import com.example.getmenu.databinding.FragmentAddPostBinding;
 import com.example.getmenu.ui.home.HomeFragment;
 
@@ -84,20 +85,23 @@ public class AddPostFragment extends Fragment {
             Post post= new Post();
 
             String title = binding.addPostTitlePt.getText().toString();
-            post.setTitle(title);
             String description = binding.addPostDescriptionPt.getText().toString();
-            post.setDescription(description);
             String avgPrice = binding.addPostAvgpricePt.getText().toString();
-            post.setAvgPrice(avgPrice);
 
-            post.setUserId(MyApplication.user.getId());
-            post.setUserName(MyApplication.user.getName());
-            post.setUserProfileUrl(MyApplication.user.getProfileImageUrl());
-            progressBar.setVisibility(View.VISIBLE);
+            if(title.length() > 0 && description.length() > 0 && avgPrice.length() > 0 && imageUri!=null && imageUri.getPath().length() > 0){
+                binding.addPostErrorMsg.setText("");
+                post.setTitle(title);
+                post.setDescription(description);
+                post.setAvgPrice(avgPrice);
+                post.setUserId(MyApplication.user.getId());
+                progressBar.setVisibility(View.VISIBLE);
 
-            Model.instance().addPost(post, imageUri,()->{
-                Navigation.findNavController(view1).popBackStack();
-            });
+                Model.instance().addPost(post, imageUri,()->{
+                    Navigation.findNavController(view1).popBackStack();
+                });
+            }else{
+                binding.addPostErrorMsg.setText("Please fill all fields");
+            }
         });
 
         binding.addPostCancelBtn.setOnClickListener(view1 ->{
