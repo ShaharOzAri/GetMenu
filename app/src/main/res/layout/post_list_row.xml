@@ -68,7 +68,10 @@
             <TextView
                 android:id="@+id/postlistrow_description_tv"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:text="TextView"
                 android:textSize="20sp" />
 
@@ -88,6 +91,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:gravity="center"
+                    android:paddingLeft="10dp"
                     android:text="Average Price Per Person:"
                     android:textSize="16sp" />
 

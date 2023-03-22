@@ -131,7 +131,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="25dp"
                     android:layout_weight="1"
-                    android:text="AvgPrice"
+                    android:text="AvgPrice ($)"
                     android:textSize="34sp" />
 
                 <EditText

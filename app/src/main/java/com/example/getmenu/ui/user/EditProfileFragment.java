@@ -39,7 +39,6 @@ public class EditProfileFragment extends Fragment {
     Uri imageUri;
     ActivityResultLauncher<String> galleryAppLauncher;
     TextView userName;
-    TextView userEmail;
     ImageView userImage;
     ProgressBar progressBar;
 
@@ -86,8 +85,6 @@ public class EditProfileFragment extends Fragment {
 
         userName = binding.editprofileNamePt;
         userName.setText(createdUser.getName());
-        userEmail = binding.editprofileEmailPt;
-        userEmail.setText(createdUser.getEmail());
         userImage = binding.editprofileImg;
         Picasso.get().load(Uri.parse(createdUser.getProfileImageUrl())).into(userImage);
         progressBar = binding.editProfileProgressBar;
@@ -103,7 +100,7 @@ public class EditProfileFragment extends Fragment {
 
         binding.editprofileSaveBtn.setOnClickListener(view1 -> {
             // check if all the fields full
-            if(userName.getText().toString().length() > 0 && userEmail.getText().toString().length() > 0){
+            if(userName.getText().toString().length() > 0){
                 progressBar.setVisibility(View.VISIBLE);
 
                 updateUserDetailsFromInput();
@@ -111,7 +108,7 @@ public class EditProfileFragment extends Fragment {
 
                 Model.instance().editUser(createdUser, imageUri, () -> {
                     progressBar.setVisibility(View.INVISIBLE);
-                    Navigation.findNavController(view).navigate(R.id.action_editProfileFragment_to_profileFragment2);
+                    Navigation.findNavController(view).navigate(R.id.nav_home);
                     Utils.print("success edit user profile: " + createdUser.getId());
                 });
 
@@ -126,6 +123,5 @@ public class EditProfileFragment extends Fragment {
 
     public void updateUserDetailsFromInput() {
         createdUser.setName(userName.getText().toString());
-        createdUser.setEmail(userEmail.getText().toString());
     }
 }

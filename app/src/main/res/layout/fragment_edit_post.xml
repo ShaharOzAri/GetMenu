@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Avg Price"
+                android:text="Avg Price ($)"
                 android:textSize="34sp"
                 app:layout_constraintEnd_toStartOf="@+id/editpost_avgprice_pt"
                 app:layout_constraintHorizontal_bias="0.5"

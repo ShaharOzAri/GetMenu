@@ -71,21 +71,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editprofile_camera_imgbtn" />
 
-            <EditText
-                android:id="@+id/editprofile_email_pt"
-                android:layout_width="276dp"
-                android:layout_height="59dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="5dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Email"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.504"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editprofile_name_pt" />
-
             <ImageButton
                 android:id="@+id/editprofile_gallery_imgbtn"
                 android:layout_width="88dp"
@@ -123,12 +108,11 @@
                 android:id="@+id/editprofileErrorMag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:textColor="#B31414"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editprofile_email_pt" />
+                app:layout_constraintTop_toBottomOf="@+id/editprofile_name_pt" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
